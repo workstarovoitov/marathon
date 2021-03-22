@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='src/phaser-arcade-physics.min.js'></script>
+</head>
+<body>
+
+    <script>
+
+    var Preloader = new Phaser.Class({
+
+        Extends: Phaser.Scene,
+
+        initialize:
+
+        function Preloader ()
+        {
+            Phaser.Scene.call(this, 'preloader');
+        },
+
+        preload: function ()
+        {
+            this.load.image('imgMainScene', 'assets/background/scene1.0.jpg');
+            this.load.image('imgMainSceneShelf', 'assets/background/scene1.1.jpg');
+            this.load.image('imgMainSceneSwitches', 'assets/background/scene2.0.jpg');
+            this.load.image('imgFin', 'assets/background/scene2.1.jpg');
+
+
+            this.load.image('imgAC0', 'assets/bookAC/0.jpg');
+            this.load.image('imgAC1', 'assets/bookAC/1.jpg');
+            this.load.image('imgAC2', 'assets/bookAC/2.jpg');
+            this.load.image('imgAC3', 'assets/bookAC/3.jpg');
+            this.load.image('imgAC4', 'assets/bookAC/4.jpg');
+            this.load.image('imgAC5', 'assets/bookAC/5.jpg');
+            this.load.image('imgAC6', 'assets/bookAC/6.jpg');
+            this.load.image('imgAC7', 'assets/bookAC/7.jpg');
+            this.load.image('imgAC8', 'assets/bookAC/8.jpg');
+            
+            this.load.image('imgSM1', 'assets/serviceManual/1.jpg');
+            this.load.image('imgSM2', 'assets/serviceManual/2.jpg');
+            
+            this.load.image('imgLampMain', 'assets/sprites/lampOnSceneMain.png');
+            this.load.image('imgLampControl', 'assets/sprites/lampOnSceneControl.png');
+
+            this.load.image('imgSwOnMain', 'assets/sprites/swOnSceneMain.png');
+            this.load.image('imgSwOffMain', 'assets/sprites/swOffSceneMain.png');
+            this.load.image('imgSwOnControl', 'assets/sprites/swOnSceneControl.png');
+            this.load.image('imgSwOffControl', 'assets/sprites/swOffSceneControl.png');
+
+            this.load.image('imgPinMain', 'assets/sprites/pinMain.png');
+            this.load.image('imgPinControl', 'assets/sprites/pinControl.png');
+            this.load.image('imgPinUnconnected', 'assets/sprites/pinUnconnected.png');
+
+            this.load.image('imgLightOnControl', 'assets/sprites/onLightSceneControl.png');
+            this.load.image('imgLightOffControl', 'assets/sprites/offLightSceneControl.png');
+
+            this.load.image('imgLightOnMain', 'assets/sprites/onLightSceneMain.png');
+            this.load.image('imgLightOffMain', 'assets/sprites/offLightSceneMain.png');
+            this.load.image('imgStart', 'assets/sprites/start.png');
+
+            this.load.audio('mp3drawerClose', 'assets/sound/drawerClose.mp3');
+            this.load.audio('mp3drawerOpen', 'assets/sound/drawerOpen.mp3');
+            this.load.audio('mp3SwOn', 'assets/sound/swOn.mp3');
+            this.load.audio('mp3SwOff', 'assets/sound/swOff.mp3');
+            this.load.audio('mp3SliderInstalled', 'assets/sound/sliderInstalled.mp3');
+            this.load.audio('mp3SliderMove', 'assets/sound/sliderMove.mp3');
+            this.load.audio('mp3PowerOn', 'assets/sound/powerOn.mp3');
+            this.load.audio('mp3Bttn', 'assets/sound/bttn.mp3');
+            this.load.audio('mp3Train', 'assets/sound/train.mp3');
+            this.load.audio('mp3cock', 'assets/sound/cock.mp3');
+            this.load.audio('mp3SoundBttn', 'assets/sound/soundBttn.mp3');
+            this.load.audio('mp3yawn', 'assets/sound/yawn.mp3');
+            this.load.audio('mp3zip', 'assets/sound/zip.mp3');
+            this.load.audio('mp3unzip', 'assets/sound/unzip.mp3');
+            this.load.audio('mp3wOpen', 'assets/sound/wardrobeOpen.mp3');
+            this.load.audio('mp3wClose', 'assets/sound/wardrobeClose.mp3');
+           
+            this.load.audio('ambient', ['assets/ambient/Ketsa - Biscuits.mp3',
+                'assets/ambient/Ketsa - Summer-Man.mp3',
+                'assets/ambient/Ketsa - Summer-Sessions.mp3',
+                'assets/ambient/Ketsa - Why-Wait.mp3',
+                'assets/ambient/Ketsa - Worked-Out.mp3']);
+            
+            this.load.image('book1.0', 'assets/books/1.0.jpg');
+            this.load.image('book1.1', 'assets/books/1.1.jpg');
+            this.load.image('book1.2', 'assets/books/1.2.jpg');
+            this.load.image('book2.0', 'assets/books/2.0.jpg');
+            this.load.image('book2.1', 'assets/books/2.1.jpg');
+            this.load.image('book2.2', 'assets/books/2.2.jpg');
+            this.load.image('book3.0', 'assets/books/2.0.jpg');
+            this.load.image('book3.1', 'assets/books/2.1.jpg');
+            this.load.image('book3.2', 'assets/books/2.2.jpg');
+
+            this.load.image('imgStartBG', 'assets/background/start.jpg');
+            this.load.image('imgWakeUp', 'assets/background/sceneMain0.jpg');
+            this.load.image('imgMainSceneLeft', 'assets/background/sceneMain1.jpg');
+            this.load.image('imgMainSceneRight', 'assets/background/sceneMain2.jpg');
+            this.load.image('imgBoard', 'assets/background/scene1.jpg');
+            this.load.image('imgDeskClosed', 'assets/background/scene2.1.jpg');
+            this.load.image('imgDeskOpened', 'assets/background/scene2.2.jpg');
+            this.load.image('imgLaptop', 'assets/background/scene3.jpg');
+            this.load.image('imgShelf', 'assets/background/scene4.jpg');
+            this.load.image('imgWardrobe', 'assets/background/scene5.jpg');
+            this.load.image('imgSportsbag', 'assets/background/scene6.jpg');
+            this.load.image('imgTreadmill', 'assets/background/scene7.jpg');
+            this.load.image('imgMap', 'assets/background/scene8.jpg');
+            this.load.image('imgBed', 'assets/background/scene9.jpg');
+
+        },
+
+        create: function ()
+        {
+            this.scene.start('StartScene');
+            ambient = this.sound.add('ambient',  { loop: -1, volume: 0.05 });      
+            click = this.sound.add('mp3SoundBttn', { volume: 2 });
+        }
+        
+
+    });
+
+        var StartScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+            function StartScene ()
+            {
+                Phaser.Scene.call(this, { key: 'StartScene', active: true });
+            },
+            create: createStartScene
+
+        });
+
+        var MainScene0 = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+            function MainScene0 ()
+            {
+                Phaser.Scene.call(this, { key: 'MainScene0', active: false });
+            },
+            preload: preloadMainScene0,
+            create: createMainScene0,
+            update: updateMainScene0
+
+        });
+
+        var MainSceneL = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+            function MainSceneL ()
+            {
+                Phaser.Scene.call(this, { key: 'MainSceneL', active: false });
+            },
+            preload: preloadMainSceneL,
+            create: createMainSceneL,
+            update: updateMainSceneL
+
+        });
+
+        var MainSceneR = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+            function MainSceneL ()
+            {
+                Phaser.Scene.call(this, { key: 'MainSceneR', active: false });
+            },
+            preload: preloadMainSceneR,
+            create: createMainSceneR,
+            update: updateMainSceneR
+
+        });
+
+        var WardrobeScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function WardrobeScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'WardrobeScene', active: false });
+            },
+            preload: preloadWardrobeScene,
+            create: createWardrobeScene,
+            update: updateWardrobeScene
+
+        });
+
+        var SportsbagScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function SportsbagScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'SportsbagScene', active: false });
+            },
+            preload: preloadSportsbagScene,
+            create: createSportsbagScene,
+            update: updateSportsbagScene
+
+        });
+
+        var TreadmillScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function TreadmillScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'TreadmillScene', active: false });
+            },
+            preload: preloadTreadmillScene,
+            create: createTreadmillScene,
+            update: updateTreadmillScene
+
+        });
+
+        var BedScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function BedScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'BedScene', active: false });
+            },
+            preload: preloadBedScene,
+            create: createBedScene,
+            update: updateBedScene
+
+        });
+
+        var MapScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function MapScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'MapScene', active: false });
+            },
+            //preload: preloadBedScene,
+            create: createMapScene,
+            update: updateMapScene
+
+        });
+
+        var BoardScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function BoardScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'BoardScene', active: false });
+            },
+            //preload: preloadBedScene,
+            create: createBoardScene,
+            update: updateBoardScene
+
+        });
+
+        var ShelfScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function ShelfScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'ShelfScene', active: false });
+            },
+            //preload: preloadBedScene,
+            create: createShelfScene,
+            update: updateShelfScene
+
+        });
+
+        var LaptopScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function LaptopScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'LaptopScene', active: false });
+            },
+            //preload: preloadBedScene,
+            create: createLaptopScene,
+            update: updateLaptopScene
+
+        });
+
+        var DeskScene = new Phaser.Class({
+
+            Extends: Phaser.Scene,
+
+            initialize:
+
+                function DeskScene ()
+            {
+                    Phaser.Scene.call(this, { key: 'DeskScene', active: false });
+            },
+            //preload: preloadBedScene,
+            create: createDeskScene,
+            update: updateDeskScene
+
+        });
+
+
+
+    var BookAC = new Phaser.Class({
+
+        Extends: Phaser.Scene,
+
+        initialize:
+
+        function BookAC ()
+        {
+            Phaser.Scene.call(this, { key: 'BookAC', active: false });
+        },
+        preload: preloadBookAC,
+        create: createBookAC
+
+    });
+
+    var ServiceManual= new Phaser.Class({
+
+        Extends: Phaser.Scene,
+
+        initialize:
+
+        function ServiceManual ()
+        {
+            Phaser.Scene.call(this, { key: 'ServiceManual', active: false });
+        },
+        preload: preloadBookAC,
+        create: createServiceManual
+
+    });
+
+    var MainSceneSwitches = new Phaser.Class({
+
+        Extends: Phaser.Scene,
+
+        initialize:
+
+        function MainSceneSwitches ()
+        {
+            Phaser.Scene.call(this, { key: 'MainSceneSwitches', active: false });
+        },
+       // preload: preloadMainSceneSwitches,
+        create: createMainSceneSwitches,
+        update: updateControl
+    });
+
+
+
+        var config = {
+            type: Phaser.AUTO,
+            backgroundColor: 'black',
+            scale: {
+            mode: Phaser.Scale.ENVELOP,
+            parent: 'phaser-example',
+            width: 1920,
+            height: 1080,
+            min: {
+                width: 800,
+                height: 600
+            },
+            max: {
+                width: 1920,
+                height: 1080
+            }
+            },
+            scene: [Preloader, LaptopScene, DeskScene, ShelfScene, BoardScene, MapScene, BedScene, TreadmillScene, SportsbagScene, WardrobeScene, MainSceneR, MainSceneL, MainScene0, StartScene],
+            audio: { disableWebAudio: true }
+        };
+
+    var text1;
+    var text2;
+    var name;
+    var fxDrawerOpen;
+    var fxDrawerClose;
+    var pageAC = 0;
+    var pageSM;
+    var manualOpenedFromMain = true;
+    var switchesStates = [  false, false, false, false,
+                            false, false, false, false,
+                            false, false, false, false,
+                            false, false, false, false];
+    var switchesStatesWin = [  false, false, false, true,
+                            true, false, true, true,
+                            false, false, false, true,
+                            true, false, false, true];
+
+    var lampsMainXY = [ [197, 400], [294, 425], [288, 377], [258, 482],
+                        [335, 480], [394, 464], [350, 517], [445, 498],
+                        [392, 502], [502, 431], [487, 521], [553, 536],
+                        [614, 570], [659, 496], [558, 453], [709, 582]];
+    var switchesMainXY = [ [855, 278], [882, 278], [910, 278], [937, 278],
+                        [855, 351], [882, 350], [910, 350], [937, 348],
+                        [856, 427], [883, 425], [911, 423], [938, 421],
+                        [856, 498], [883, 496], [911, 493], [938, 490]];
+    var sliderPos = [2, 2, 2, 2];
+    var sliderPosWin = [4, 2, 6, 5];
+    var sliderEnable = [true, true, false, false];
+    var sliderMainInstalled = false;
+    var sliderControlInstalled = false;
+
+    var slidersWin = false;
+    var switchesWin = false;
+    
+    var sliderMainStartXY = [[920, 583], [919, 628], [1087, 558], [1087, 600]];
+    var sliderMainEndXY = [[1030, 565], [1029, 608], [1184, 543], [1184, 581]];
+    
+    var sliderControlStartXY = [[1175, 642], [1175, 708], [1490, 642], [1490, 708]];
+    var sliderControlEndXY = [[1388, 642], [1388, 708], [1704, 642], [1704, 708]];
+
+    var lampsControlXY = [ [252, 329], [347, 364], [347, 312], [307, 423],
+                        [387, 427], [454, 415], [400, 475], [510, 462],
+                        [448, 459], [582, 388], [555, 494], [638, 520],
+                        [713, 573], [779, 484], [648, 418], [848, 605]];
+    var switchesControlXY = [ [1068, 213], [1119, 213], [1169, 213], [1214, 213],
+                        [1068, 313], [1117, 313], [1166, 313], [1214, 313],
+                        [1068, 413], [1117, 413], [1166, 413], [1214, 413],
+                        [1068, 513], [1117, 513], [1166, 513], [1214, 513]];
+    
+    var test;
+    var groupLampsMain;
+    var groupSwitchesMain;
+    var groupLampsControl;
+    var groupSwitchesControl;
+    var groupSliderMain;
+    var groupSliderControl;
+    var groupLightsMain;
+    var groupLightsControl;
+    var blinkEvent
+    var pinMain;
+
+        var ambient;    
+        var cick;    
+        var ambientOn = false;    
+        var shelfWin = true;    
+        var sportsbagOpen = true;    
+        var wardrobeOpen = false;    
+        var headBandPacked = false;    
+    
+    var game = new Phaser.Game(config);
+
+        function createStartScene() {
+
+            imgStartScene = this.add.image(0, 0, 'imgStartBG').setOrigin(0);
+          
+            this.input.on('pointerdown', function (pointer, gameObject) {
+                //this.scene.switch('MainScene0');
+
+                this.cameras.main.fadeOut(1000);
+                timedEvent = this.time.addEvent({ delay: 1250, callback: onSleep, callbackScope: this, repeat: 0, startAt: 0 });
+
+            }, this);
+
+        }
+
+
+        function preloadMainScene0()
+        {
+
+        }
+
+        function preloadMainSceneL() {
+            //this.load.audio('mp3cock', 'assets/sound/cock.wav');
+        }
+
+        function preloadMainSceneR() {
+            //this.load.audio('mp3cock', 'assets/sound/cock.wav');
+        }
+
+        function preloadWardrobeScene() {
+
+        }
+
+        function preloadSportsbagScene() {
+
+        }
+
+        function preloadTreadmillScene() {
+
+        }
+
+        function preloadBedScene() {
+
+        }
+
+
+
+
+        function createMainScene0()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgWakeUp').setOrigin(0);
+            this.cameras.main.fadeIn(6000);
+
+            var fxCock = this.sound.add('mp3cock');
+            fxCock.play(); 
+        
+            var sprite_mainLeft = this.add.sprite(0, 0); 
+            var sprite_mainRight = this.add.sprite(0, 0); 
+            var sprite_wardrobe = this.add.sprite(0, 0); 
+            var sprite_soundBox = this.add.sprite(0, 0);
+       
+            var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0,          500, 0,     500, 850,       0, 850]);
+            var plgn_mainRight = new Phaser.Geom.Polygon([1100, 0,      1920, 0,    1920, 850,      1100, 850]);
+            var plgn_wardrobe = new Phaser.Geom.Polygon([550, 0,        1050, 0,    1050, 900,       550, 900]);
+            var plgn_soundBox = new Phaser.Geom.Polygon([1550, 700,     1920, 700,  1920, 900,      1550, 900]);
+       
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainLeft.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainRight.points, true);
+            //graphics.fillStyle(0xffaaaa);
+            //graphics.fillPoints(plgn_wardrobe.points, true);
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_soundBox.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+        
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_wardrobe.setInteractive(plgn_wardrobe, Phaser.Geom.Polygon.Contains);
+            sprite_soundBox.setInteractive(plgn_soundBox, Phaser.Geom.Polygon.Contains);
+
+            if (!headBandPacked) {
+                var sprite_headBand = this.add.sprite(1460, 910, 'imgPinUnconnected').setOrigin().setScale(1).setInteractive();
+                this.input.setDraggable(sprite_headBand);
+            }
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneL');
+
+            },this);
+
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneR');
+
+           },this);
+
+            sprite_wardrobe.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('WardrobeScene');
+
+            },this);
+
+            sprite_soundBox.on('pointerdown', function (pointer, gameObject) {
+                playAmbient();
+            }, this);
+
+            sprite_headBand.on('pointerdown', function (pointer, gameObject) {
+                headBandPacked = true;
+                sprite_headBand.visible = false;
+            },this);
+
+    }
+ 
+        function createMainSceneL()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgMainSceneLeft').setOrigin(0);
+          
+            var sprite_mainRight = this.add.sprite(0, 0); 
+            var sprite_wardrobe = this.add.sprite(0, 0); 
+            var sprite_books = this.add.sprite(0, 0);
+            var sprite_board = this.add.sprite(0, 0);
+            var sprite_desk = this.add.sprite(0, 0);
+            var sprite_laptop = this.add.sprite(0, 0);
+            var sprite_shelf = this.add.sprite(0, 0);
+       
+            var plgn_mainRight = new Phaser.Geom.Polygon([1570, 0,      1920, 0,    1920, 1080,      1570, 1080]);
+            var plgn_wardrobe = new Phaser.Geom.Polygon([1100, 0,        1550, 0,    1550, 680,       1100, 680]);
+            var plgn_books = new Phaser.Geom.Polygon([950, 0,     1150, 0,  1150, 100,      950, 100]);
+            var plgn_board = new Phaser.Geom.Polygon([270, 0,     1030, 140,  1020, 570,      280, 630]);
+            var plgn_desk = new Phaser.Geom.Polygon([180, 700,     1080, 600,  1360, 700,      1360, 1080,  180, 1080]);
+            var plgn_laptop = new Phaser.Geom.Polygon([710, 610,     860, 570,  1030, 710,      910, 760,   750, 730]);
+            var plgn_shelf = new Phaser.Geom.Polygon([350, 890,     790, 820,  790, 1080,      350, 1080]);
+       
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainRight.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainRight.points, true);
+            //graphics.fillStyle(0xffaaaa);
+            //graphics.fillPoints(plgn_wardrobe.points, true);
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_books.points, true);
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_board.points, true);
+            //graphics.fillStyle(0xaafaff);
+            //graphics.fillPoints(plgn_desk.points, true);
+            //graphics.fillStyle(0x00aaff);
+            //graphics.fillPoints(plgn_laptop.points, true);
+            //graphics.fillStyle(0xff00ff);
+            //graphics.fillPoints(plgn_shelf.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+        
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_wardrobe.setInteractive(plgn_wardrobe, Phaser.Geom.Polygon.Contains);
+            sprite_books.setInteractive(plgn_books, Phaser.Geom.Polygon.Contains);
+            sprite_board.setInteractive(plgn_board, Phaser.Geom.Polygon.Contains);
+            sprite_desk.setInteractive(plgn_desk, Phaser.Geom.Polygon.Contains);
+            sprite_laptop.setInteractive(plgn_laptop, Phaser.Geom.Polygon.Contains);
+            sprite_shelf.setInteractive(plgn_shelf, Phaser.Geom.Polygon.Contains);
+
+
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneR');
+
+            }, this);
+
+            sprite_wardrobe.on('pointerdown', function (pointer, gameObject) {
+          
+                this.scene.switch('WardrobeScene');
+
+            },this);
+
+            sprite_books.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('BooksSceneL');
+            }, this);
+
+            sprite_board.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('BoardScene');
+
+            }, this);
+
+            sprite_desk.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('DeskScene');
+
+            }, this);
+
+            sprite_laptop.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('LaptopScene');
+
+            }, this);
+
+            sprite_shelf.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('ShelfScene');
+
+            }, this);
+
+
+    }
+ 
+        function createMainSceneR()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgMainSceneRight').setOrigin(0);
+
+            var sprite_treadmill = this.add.sprite(0, 0); 
+            var sprite_wardrobe = this.add.sprite(0, 0); 
+            var sprite_mainLeft = this.add.sprite(0, 0); 
+            var sprite_sportsBag = this.add.sprite(0, 0); 
+            var sprite_soundBox = this.add.sprite(0, 0); 
+            var sprite_books = this.add.sprite(0, 0); 
+            var sprite_bed = this.add.sprite(0, 0); 
+            var sprite_map = this.add.sprite(0, 0); 
+        
+            var plgn_treadmill = new Phaser.Geom.Polygon([700, 0, 1100, 0, 1100, 1080, 700, 1080]);
+            var plgn_wardrobe = new Phaser.Geom.Polygon([0, 0, 500, 0, 500, 1080, 0, 1080]);
+            var plgn_mainLeft = new Phaser.Geom.Polygon([0, 530, 230, 530, 230, 930, 1400, 930, 1400, 1080, 0, 1080]);
+            var plgn_sportsBag = new Phaser.Geom.Polygon([440, 770, 580, 700, 700, 700, 700, 840, 570, 920, 440, 910]);
+            var plgn_soundBox = new Phaser.Geom.Polygon([1280, 590, 1420, 590, 1420, 700, 1280, 690]);
+            var plgn_books = new Phaser.Geom.Polygon([1250, 720, 1400, 720, 1400, 820, 1250, 820]);
+            var plgn_bed = new Phaser.Geom.Polygon([1400, 930, 1630, 530, 1920, 530, 1920, 1080, 1400, 1080]);
+            var plgn_map = new Phaser.Geom.Polygon([1250, 100, 1750, 100, 1750, 500, 1250, 500]);
+
+            
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xff00aa);
+            //graphics.fillPoints(plgn_treadmill.points, true);
+            //graphics.fillStyle(0xffaaaa);
+            //graphics.fillPoints(plgn_wardrobe.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainLeft.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_sportsBag.points, true);
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_soundBox.points, true);
+            //graphics.fillStyle(0xaaaaff);
+            //graphics.fillPoints(plgn_books.points, true);
+            //graphics.fillStyle(0xaaaa00);
+            //graphics.fillPoints(plgn_bed.points, true);
+            //graphics.fillStyle(0xaaeaee);
+            //graphics.fillPoints(plgn_map.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+        
+            sprite_treadmill.setInteractive(plgn_treadmill, Phaser.Geom.Polygon.Contains);
+            sprite_wardrobe.setInteractive(plgn_wardrobe, Phaser.Geom.Polygon.Contains);
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_sportsBag.setInteractive(plgn_sportsBag, Phaser.Geom.Polygon.Contains);
+            sprite_soundBox.setInteractive(plgn_soundBox, Phaser.Geom.Polygon.Contains);
+            sprite_books.setInteractive(plgn_books, Phaser.Geom.Polygon.Contains);
+            sprite_bed.setInteractive(plgn_bed, Phaser.Geom.Polygon.Contains);
+            sprite_map.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
+
+           // if (!headBandPacked) {
+           //     var sprite_headBand = this.add.sprite(1460, 910, 'imgPinUnconnected').setOrigin().setScale(1).setInteractive();
+           //     this.input.setDraggable(sprite_headBand);
+           // }
+
+            sprite_treadmill.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('TreadmillScene');
+            },this);
+
+            sprite_wardrobe.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('WardrobeScene');
+            },this);
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneL');
+
+            }, this);
+
+            sprite_sportsBag.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('SportsbagScene');
+            }, this);
+
+            sprite_soundBox.on('pointerdown', function (pointer, gameObject) {
+                playAmbient();
+            }, this);
+
+            sprite_books.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('BooksSceneR');
+
+            }, this);
+
+            sprite_bed.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('BedScene');
+
+            }, this);
+
+            sprite_map.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MapScene');
+
+            }, this);
+
+
+            // sprite_headBand.on('pointerdown', function (pointer, gameObject) {
+           //     headBandPacked = true;
+           //     sprite_headBand.visible = false;
+           // },this);
+
+    }
+
+        function createWardrobeScene()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgWardrobe').setOrigin(0);
+
+            var sprite_mainLeft = this.add.sprite(0, 0);
+            var sprite_mainRight = this.add.sprite(0, 0);
+            var sprite_wardrobe = this.add.sprite(0, 0);
+            var sprite_books = this.add.sprite(0, 0);
+
+            var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0, 500, 0, 500, 1080, 0, 1080]);
+            var plgn_mainRight = new Phaser.Geom.Polygon([1350, 0, 1920, 0, 1920, 1080, 1350, 1080]);
+            var plgn_wardrobe = new Phaser.Geom.Polygon([500, 0, 1350, 0, 1350, 1080, 500, 1080]);
+            var plgn_books = new Phaser.Geom.Polygon([360, 100, 520, 100, 520, 260, 360, 260]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainLeft.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainRight.points, true);
+            //graphics.fillStyle(0xffaaaa);
+            //graphics.fillPoints(plgn_wardrobe.points, true);
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_books.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_wardrobe.setInteractive(plgn_wardrobe, Phaser.Geom.Polygon.Contains);
+            sprite_books.setInteractive(plgn_books, Phaser.Geom.Polygon.Contains);
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneL');
+
+            }, this);
+            
+           sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneR');
+
+            }, this);
+            
+           
+
+            sprite_wardrobe.on('pointerdown', function (pointer, gameObject) {
+
+                if (wardrobeOpen) {
+                    var fxWardrobe = this.sound.add('mp3wClose');
+                } else {
+                    var fxWardrobe = this.sound.add('mp3wOpen');
+                }
+               
+                fxWardrobe.play();
+                wardrobeOpen = !wardrobeOpen;
+
+            }, this);
+
+            sprite_books.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('BooksSceneL');
+            }, this);
+
+        }
+
+        function createSportsbagScene()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgSportsbag').setOrigin(0);
+
+            var sprite_mainRight = this.add.sprite(0, 0); 
+            var sprite_sportsbag = this.add.sprite(0, 0);
+
+            var plgn_mainRight = new Phaser.Geom.Polygon([      0, 0,       1920, 0,       1920, 1080,         0, 1080]);
+            var plgn_sportsbag = new Phaser.Geom.Polygon([            330, 520,         990, 0,        1500, 0,     1580, 420,      1050, 1080,      520, 1080,      330, 730]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xaaeaee);
+            //graphics.fillPoints(plgn_sportsbag.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_sportsbag.setInteractive(plgn_sportsbag, Phaser.Geom.Polygon.Contains);
+
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneR');
+
+            }, this);
+            
+           
+
+            sprite_sportsbag.on('pointerdown', function (pointer, gameObject) {
+
+                if (sportsbagOpen) {
+                    var fxZip = this.sound.add('mp3zip');
+                } else {
+                    var fxZip = this.sound.add('mp3unzip');
+                }
+               
+                fxZip.play();
+                sportsbagOpen = !sportsbagOpen;
+
+            }, this);
+
+        }
+
+        function createTreadmillScene()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgTreadmill').setOrigin(0);
+
+            var sprite_mainRight = this.add.sprite(0, 0); 
+            var sprite_treadmillStart = this.add.sprite(0, 0); 
+            var sprite_treadmill = this.add.sprite(0, 0);
+
+            var plgn_mainRight = new Phaser.Geom.Polygon([      0, 0,       1920, 0,       1920, 1080,         0, 1080]);
+            var plgn_treadmillStart = new Phaser.Geom.Polygon([          630, 620,       1020, 620,       1020, 810,       630, 810]);
+            var plgn_treadmill = new Phaser.Geom.Polygon([            450, 0,         1280, 0,        1280, 1080,      450, 1080]);
+
+            var graphics = this.add.graphics();
+           
+            //graphics.fillStyle(0xaaaaff);
+            //graphics.fillPoints(plgn_treadmill.points, true);
+            //graphics.fillStyle(0xaaeaee);
+            //graphics.fillPoints(plgn_treadmillStart.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_treadmillStart.setInteractive(plgn_treadmillStart, Phaser.Geom.Polygon.Contains);
+            sprite_treadmill.setInteractive(plgn_treadmill, Phaser.Geom.Polygon.Contains);
+
+
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneR');
+
+            }, this);
+            
+           
+
+            sprite_treadmillStart.on('pointerdown', function (pointer, gameObject) {
+
+
+            }, this);
+
+        }
+ 
+        function createBedScene()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgBed').setOrigin(0);
+
+            var sprite_mainRight = this.add.sprite(0, 0); 
+            var sprite_bed = this.add.sprite(0, 0);
+            var sprite_soundBox = this.add.sprite(0, 0);
+            var sprite_books = this.add.sprite(0, 0); 
+            var sprite_map = this.add.sprite(0, 0);
+
+            var plgn_mainRight = new Phaser.Geom.Polygon([      0, 800,       720, 700,       1000, 1080,         0, 1080]);
+            var plgn_bed = new Phaser.Geom.Polygon([            700, 320,       1300, 320,      1300, 470,      700, 550]);
+            var plgn_soundBox = new Phaser.Geom.Polygon([       100, 300,       430, 330,      430, 530,       100, 480       ]);
+            var plgn_books = new Phaser.Geom.Polygon([          230, 620,       420, 590,       430, 720,       230, 750]);
+            var plgn_map = new Phaser.Geom.Polygon([            50, 0,         1000, 0,        1000, 150,      50, 150]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_mainRight.points, true);
+            //graphics.fillStyle(0xaaaa00);
+            //graphics.fillPoints(plgn_bed.points, true);
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_soundBox.points, true);
+            //graphics.fillStyle(0xaaaaff);
+            //graphics.fillPoints(plgn_books.points, true);
+            //graphics.fillStyle(0xaaeaee);
+            //graphics.fillPoints(plgn_map.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_bed.setInteractive(plgn_bed, Phaser.Geom.Polygon.Contains);
+            sprite_soundBox.setInteractive(plgn_soundBox, Phaser.Geom.Polygon.Contains);
+            sprite_books.setInteractive(plgn_books, Phaser.Geom.Polygon.Contains);
+            sprite_map.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
+
+
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MainSceneR');
+
+            }, this);
+            
+            sprite_bed.on('pointerdown', function (pointer, gameObject) {
+
+                var fxYawn = this.sound.add('mp3yawn');
+                fxYawn.play(); 
+
+                this.cameras.main.fadeOut(3000);
+                timedEvent = this.time.addEvent({ delay: 3250, callback: onSleep, callbackScope: this, repeat: 0, startAt: 0 });
+
+            }, this);
+
+            sprite_soundBox.on('pointerdown', function (pointer, gameObject) {
+
+                playAmbient();
+
+            }, this);
+
+            sprite_books.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('BooksSceneR');
+
+            }, this);
+
+
+            sprite_map.on('pointerdown', function (pointer, gameObject) {
+
+                this.scene.switch('MapScene');
+
+            }, this);
+
+        }
+
+        function createMapScene()
+        {
+
+            var imgScene = this.add.image(0, 0, 'imgMap').setOrigin(0);
+
+            var sprite_mainRight = this.add.sprite(0, 0); 
+            var sprite_map = this.add.sprite(0, 0); 
+         
+            var plgn_mainRight = new Phaser.Geom.Polygon([      0, 0,       1920, 0,       1920, 1080,         0, 1080]);
+            var plgn_map = new Phaser.Geom.Polygon([      180, 0,       1400, 120,       1400, 920,         180, 1080]);
+           
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_map.points, true);
+           
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+            sprite_map.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
+       
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('MainSceneR');
+            }, this);
+            
+
+        }
+
+        function createBoardScene() {
+
+            var imgScene = this.add.image(0, 0, 'imgBoard').setOrigin(0);
+
+            var sprite_mainLeft = this.add.sprite(0, 0);
+            var sprite_board = this.add.sprite(0, 0);
+
+            var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
+            var plgn_board = new Phaser.Geom.Polygon([290, 0, 1690, 0, 1650, 860, 330, 860]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_map.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_board.setInteractive(plgn_board, Phaser.Geom.Polygon.Contains);
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('MainSceneL');
+            }, this);
+
+
+        }
+
+        function createShelfScene() {
+
+            var imgScene = this.add.image(0, 0, 'imgShelf').setOrigin(0);
+
+            var sprite_mainLeft = this.add.sprite(0, 0);
+            var sprite_shelf = this.add.sprite(0, 0);
+
+            var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
+            var plgn_shelf = new Phaser.Geom.Polygon([480, 340, 1520, 340, 1520, 850, 480, 850]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+      //      graphics.fillPoints(plgn_shelf.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_shelf.setInteractive(plgn_shelf, Phaser.Geom.Polygon.Contains);
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('MainSceneL');
+            }, this);
+
+
+        }
+
+        function createLaptopScene() {
+
+            var imgScene = this.add.image(0, 0, 'imgLaptop').setOrigin(0);
+
+            var sprite_mainLeft = this.add.sprite(0, 0);
+            var sprite_laptop = this.add.sprite(0, 0);
+
+            var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
+            var plgn_laptop = new Phaser.Geom.Polygon([320, 100, 1650, 100, 1650, 920, 320, 920]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_map.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_laptop.setInteractive(plgn_laptop, Phaser.Geom.Polygon.Contains);
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('MainSceneL');
+            }, this);
+
+
+        }
+
+        function createDeskScene() {
+
+            var imgSceneClosed = this.add.image(0, 0, 'imgDeskClosed').setOrigin(0);
+            var imgSceneOpened = this.add.image(0, 0, 'imgDeskOpened').setOrigin(0);
+            imgSceneOpened.visible = false;
+
+
+            var sprite_mainLeft = this.add.sprite(0, 0);
+            var sprite_board = this.add.sprite(0, 0);
+            var sprite_shelf = this.add.sprite(0, 0);
+            var sprite_laptop = this.add.sprite(0, 0);
+
+            var plgn_mainLeft = new Phaser.Geom.Polygon([830, 710, 1920, 670, 1920, 1080, 830, 1080]);
+            var plgn_board = new Phaser.Geom.Polygon([250, 0, 1920, 0, 100, 1920, 250, 120]);
+            var plgn_shelf = new Phaser.Geom.Polygon([100, 730, 770, 700, 770, 1080, 100, 1080]);
+            var plgn_laptop = new Phaser.Geom.Polygon([860, 210, 1200, 130, 1360, 490, 1020, 600]);
+
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_map.points, true);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+
+            this.input.mouse.disableContextMenu();
+
+            this.input.topOnly = true;
+
+            sprite_mainLeft.setInteractive(plgn_mainLeft, Phaser.Geom.Polygon.Contains);
+            sprite_board.setInteractive(plgn_board, Phaser.Geom.Polygon.Contains);
+            sprite_shelf.setInteractive(plgn_shelf, Phaser.Geom.Polygon.Contains);
+            sprite_laptop.setInteractive(plgn_laptop, Phaser.Geom.Polygon.Contains);
+
+            sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('MainSceneL');
+            }, this);
+
+            sprite_board.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('BoardScene');
+            }, this);
+
+            sprite_shelf.on('pointerdown', function (pointer, gameObject) {
+
+                if (!shelfWin) {
+                    this.scene.switch('ShelfeScene');
+                } else {
+                    if (!imgSceneOpened.visible) {
+                        this.sound.play('mp3drawerOpen');
+                        imgSceneClosed.visible = false;
+                        imgSceneOpened.visible = true;
+                    } else {
+                        this.sound.play('mp3drawerClose');
+                        imgSceneClosed.visible = true;
+                        imgSceneOpened.visible = false;
+                    }
+                   
+                    
+                }
+
+               
+           
+                
+
+            }, this);
+            sprite_laptop.on('pointerdown', function (pointer, gameObject) {
+                this.scene.switch('LaptopScene');
+            }, this);
+
+
+        }
+
+
+
+
+    function preloadBookAC ()
+    {
+        this.load.audio('mp3page', 'assets/sound/page.mp3');
+    }
+
+    function createBookAC ()
+    {
+        //this.add.image(0, 0, 'imgAC' + pageAC).setOrigin(0);    
+        groupPagesAC = this.add.group();
+        for (var i = 0; i <= 8; i++) {
+            groupPagesAC.create(0, 0, 'imgAC' + i).setOrigin(0);
+        }
+        var childPagesAC = groupPagesAC.getChildren();
+        for (var i = 0; i < 9; i++) {
+            childPagesAC[i].visible = false;
+        }
+        childPagesAC[pageAC].visible = true;
+        var sprite_background = this.add.sprite(0, 0);
+        var sprite_leftPage = this.add.sprite(0, 0);
+        var sprite_rightPage = this.add.sprite(0, 0);
+       
+        var plgn_background = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
+        var plgn_leftPage = new Phaser.Geom.Polygon([300, 170, 880, 120, 940, 1020, 300, 1060]);
+        var plgn_rightPage = new Phaser.Geom.Polygon([920, 115, 1490, 90, 1590, 965, 970, 1025]);
+
+        this.input.topOnly = true;
+        sprite_background.setInteractive(plgn_background, Phaser.Geom.Polygon.Contains);
+        sprite_leftPage.setInteractive(plgn_leftPage, Phaser.Geom.Polygon.Contains);
+        sprite_rightPage.setInteractive(plgn_rightPage, Phaser.Geom.Polygon.Contains);
+        text2 = this.add.text(10, 10, '', { fill: '#00ff00' });
+        sprite_leftPage.on('pointerdown', function (pointer, gameObject) {
+            this.sound.play('mp3page');
+           childPagesAC[pageAC].visible = false;
+            if (pageAC > 0) {
+                
+                pageAC--;
+            }
+            childPagesAC[pageAC].visible = true;
+        },this);
+
+        sprite_rightPage.on('pointerdown', function (pointer, gameObject) {
+            this.sound.play('mp3page');
+            childPagesAC[pageAC].visible = false;
+            if (pageAC < 8) {
+                
+                pageAC++;
+            }
+            childPagesAC[pageAC].visible = true;
+        },this);
+       
+        sprite_background.on('pointerdown', function (pointer, gameObject) {
+            this.scene.switch('Main');
+       },this);
+
+    }
+
+    function createServiceManual ()
+    {
+        page2 = this.add.image(0, 0, 'imgSM2').setOrigin(0);  
+        page1 = this.add.image(0, 0, 'imgSM1').setOrigin(0);  
+        page2.visible = false;
+        var firstPage = true;
+        var sprite_background = this.add.zone(0, 0).setOrigin(0);
+        var sprite_page = this.add.zone(0, 0).setOrigin(0);
+        
+        var plgn_background = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
+        var plgn_page = new Phaser.Geom.Polygon([260, 40, 1660, 100, 1660, 1020, 200, 970]);
+        
+        this.input.topOnly = true;
+        sprite_background.setInteractive(plgn_background, Phaser.Geom.Polygon.Contains);
+        sprite_page.setInteractive(plgn_page, Phaser.Geom.Polygon.Contains);
+       
+        sprite_page.on('pointerdown', function (pointer, gameObject) {
+            this.sound.play('mp3page');
+
+            if (firstPage) {
+                firstPage = false;
+                page2.visible = true;
+                page1.visible = false;
+                //this.add.image(0, 0, 'imgSM2').setOrigin(0);
+            }else{
+                firstPage = true;
+                page2.visible = false;
+                page1.visible = true;
+                
+                //this.add.image(0, 0, 'imgSM1').setOrigin(0);
+            }           
+        },this);
+       
+        sprite_background.on('pointerdown', function (pointer, gameObject) {
+            if (manualOpenedFromMain){
+                this.scene.switch('Main');
+            }else{
+                this.scene.switch('MainSceneSwitches');
+            }
+            
+       },this);
+
+    }
+
+    
+
+    function createMainSceneSwitches ()
+    {
+        this.add.image(0, 0, 'imgMainSceneSwitches').setOrigin(0);    
+        var imgFin = this.add.image(0, 0, 'imgFin').setOrigin(0).setInteractive();; 
+        imgFin.visible = false;
+       // text1 = this.add.text(500, 300, '', { fill: '#00ff00' });
+       // text2 = this.add.text(500, 500, '', { fill: '#00ff00' });
+        var fxOn = this.sound.add('mp3SwOn');
+        var fxOff = this.sound.add('mp3SwOff');    
+        var sliderMove = this.sound.add('mp3SliderMove');    
+        var sliderInstalled = this.sound.add('mp3SliderInstalled');    
+        var powerOn = this.sound.add('mp3PowerOn');   
+        var soundBttn = this.sound.add('mp3Bttn');   
+        var soundTrain = this.sound.add('mp3Train');    
+
+        var zoneBackground = this.add.zone(0, 0).setOrigin(0); 
+        var zoneBooks = this.add.zone(0, 0).setOrigin(0);
+        var zoneSwitchesAll = this.add.zone(0, 0).setOrigin(0);
+        
+        var zoneSlider0 = this.add.zone(0, 0).setOrigin(0);
+        var zoneSlider1 = this.add.zone(0, 0).setOrigin(0);
+        var zoneSlider2 = this.add.zone(0, 0).setOrigin(0);
+        var zoneSlider3 = this.add.zone(0, 0).setOrigin(0);
+        zoneSlider0.setName('zSlider0');
+        zoneSlider1.setName('zSlider1');
+        zoneSlider2.setName('zSlider2');
+        zoneSlider3.setName('zSlider3');
+
+        zoneBackground.setName('zBackground');
+        zoneBooks.setName('zBooks');
+        zoneSwitchesAll.setName('zSwitchesAll');
+       
+        var plgnBackground = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
+        var plgnBooks = new Phaser.Geom.Polygon([945, 825, 1125, 795, 1240, 820, 1065, 870]);
+        var plgnSwitchesAll = new Phaser.Geom.Polygon([1030, 100, 1920, 100, 1920, 770, 1030, 770]);
+        
+        var plgnSlider0 = new Phaser.Geom.Polygon([1110, 605, 1410, 605, 1410, 655, 1110, 655]);
+        var plgnSlider1 = new Phaser.Geom.Polygon([1110, 675, 1410, 675, 1410, 730, 1110, 730]);
+
+        var plgnSlider2 = new Phaser.Geom.Polygon([1420, 605, 1730, 605, 1730, 655, 1420, 655]);
+        var plgnSlider3 = new Phaser.Geom.Polygon([1420, 675, 1730, 675, 1730, 730, 1420, 730]);
+
+        this.input.topOnly = true;
+        
+        zoneBackground.setInteractive(plgnBackground, Phaser.Geom.Polygon.Contains);
+        zoneBooks.setInteractive(plgnBooks, Phaser.Geom.Polygon.Contains);
+        zoneSwitchesAll.setInteractive(plgnSwitchesAll, Phaser.Geom.Polygon.Contains);
+        
+        zoneSlider0.setInteractive(plgnSlider0, Phaser.Geom.Polygon.Contains);
+        zoneSlider1.setInteractive(plgnSlider1, Phaser.Geom.Polygon.Contains);
+        zoneSlider2.setInteractive(plgnSlider2, Phaser.Geom.Polygon.Contains);
+        zoneSlider3.setInteractive(plgnSlider3, Phaser.Geom.Polygon.Contains);
+        
+        zoneSlider0.input.dropZone = false;
+        zoneSlider1.input.dropZone = false;
+        zoneSlider2.input.dropZone = true;
+        zoneSlider3.input.dropZone = true;
+
+        zoneSwitchesAll.input.dropZone = false;
+        zoneBooks.input.dropZone = false;
+        zoneBackground.input.dropZone = false;
+
+        var pin = this.add.sprite(1252, 882, 'imgPinUnconnected').setScale(0.4).setInteractive();
+        var bttn = this.add.sprite(1716, 351, 'imgStart').setScale(1.05).setInteractive();
+        this.input.setDraggable(pin);
+
+        this.input.topOnly = true;
+        
+        groupLampsControl = this.add.group();
+        groupSwitchesControl = this.add.group();
+        groupSliderControl = this.add.group();
+        groupLightsControl = this.add.group();
+        for (var i = 0; i < 16; i++) {
+            groupLampsControl.create(lampsControlXY[i][0], lampsControlXY[i][1] , 'imgLampControl').setScale(0.64);
+            var swOffSprite = groupSwitchesControl.create(switchesControlXY[i][0], switchesControlXY[i][1] , 'imgSwOffControl');
+            var swOnSprite = groupSwitchesControl.create(switchesControlXY[i][0], switchesControlXY[i][1] , 'imgSwOnControl');
+            swOffSprite.name = i;
+            swOnSprite.name = i;
+        }
+
+        for (var i = 0; i < 4; i++) {
+            groupSliderControl.create(Math.abs(sliderControlStartXY[i][0]-sliderControlEndXY[i][0])/7*sliderPos[i]+sliderControlStartXY[i][0], sliderControlStartXY[i][1] - Math.abs(sliderControlStartXY[i][1]-sliderControlEndXY[i][1])/7*sliderPos[i], 'imgPinMain').setOrigin().setScale(0.75);
+        }
+        var childrenSlider = groupSliderControl.getChildren();
+        //this.input.setDraggable(childrenSlider);
+
+        for (var i = 0; i < 3; i++) {
+            var child = groupLightsControl.create(1372 + i*86 , 225, 'imgLightOnControl').setScale(0.64);
+            child.visible = false;
+            var child = groupLightsControl.create(1372 + i*86 , 225, 'imgLightOffControl').setScale(0.64);
+            child.visible = false;
+        }
+
+
+        groupSwitchesControl.inputEnableChildren = true;
+        groupSliderControl.inputEnableChildren = true;
+
+
+        //blinkEvent = this.time.addEvent({ delay: 500, callback: onBlink, callbackScope: this, repeat: 3 });
+
+
+        this.input.on('dragstart', function (pointer, gameObject) {
+
+            this.children.bringToTop(gameObject);
+
+        }, this);
+
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+        });
+
+        this.input.on('drop', function (pointer, gameObject, dropZone) {
+            if (dropZone.name == 'zSlider2') {
+                if(sliderEnable[2]){
+                    gameObject.x = gameObject.input.dragStartX;
+                    gameObject.y = gameObject.input.dragStartY;
+                } else {
+                    sliderControlInstalled = true;
+                    sliderEnable[2] = true;
+                    sliderInstalled.play();
+                    if (sliderMainInstalled) powerOn.play();
+                    gameObject.destroy();
+                }
+            }
+            if (dropZone.name == 'zSlider3') {
+                if(sliderEnable[3]){
+                    gameObject.x = gameObject.input.dragStartX;
+                    gameObject.y = gameObject.input.dragStartY;
+                } else {
+                    sliderControlInstalled = true;
+                    sliderEnable[3] = true;
+                    sliderInstalled.play();
+                    if (sliderMainInstalled) powerOn.play();
+                    gameObject.destroy();
+                }
+            }
+            
+            
+            
+            event.stopPropagation();
+
+        });
+
+        this.input.on('dragend', function (pointer, gameObject, dropped) {
+            if (!dropped)
+            {
+                gameObject.x = gameObject.input.dragStartX;
+                gameObject.y = gameObject.input.dragStartY;
+            }
+        });
+
+        
+        this.input.setHitArea(groupSwitchesControl.getChildren()).on('gameobjectdown', function(pointer, gameObject) {
+            event.stopPropagation();
+            name = gameObject.name;
+            switchesStates[gameObject.name] = !switchesStates[gameObject.name];
+            if (name !== "" && name >= 0 && name <= 15){
+                 if (switchesStates[gameObject.name] == true) fxOn.play();
+                else fxOff.play();
+            }
+           
+        });
+        
+        zoneBackground.on('pointerdown', function (pointer, gameObject) {
+            //event.stopPropagation();
+            this.scene.switch('Main');
+        },this);
+
+        zoneBooks.on('pointerdown', function (pointer, gameObject) {
+            manualOpenedFromMain = false;
+            this.scene.switch('ServiceManual');
+        },this);
+
+        zoneSlider0.on('pointerdown', function (pointer, gameObject) {
+            if (childrenSlider[0].x > pointer.worldX && sliderPos[0] > 0){
+                sliderPos[0]--;
+                sliderMove.play();
+            }
+            if (childrenSlider[0].x < pointer.worldX && sliderPos[0] < 7){
+                sliderPos[0]++;
+                sliderMove.play();
+            }
+        },this);
+
+        zoneSlider1.on('pointerdown', function (pointer, gameObject) {
+            if (childrenSlider[1].x > pointer.worldX && sliderPos[1] > 0){
+                sliderPos[1]--;
+                sliderMove.play();
+            }
+            if (childrenSlider[1].x < pointer.worldX && sliderPos[1] < 7){
+                sliderPos[1]++;
+                sliderMove.play();
+            }
+        },this);
+
+        zoneSlider2.on('pointerdown', function (pointer, gameObject) {
+            if (sliderEnable[2]){
+                if (childrenSlider[2].x > pointer.worldX && sliderPos[2] > 0){
+                    sliderPos[2]--;
+                    sliderMove.play();
+                }
+                if (childrenSlider[2].x < pointer.worldX && sliderPos[2] < 7){
+                    sliderPos[2]++;
+                    sliderMove.play();
+                }
+            }
+                
+        },this);
+
+        zoneSlider3.on('pointerdown', function (pointer, gameObject) {
+            if (sliderEnable[3]){
+                if (childrenSlider[3].x > pointer.worldX && sliderPos[3] > 0){
+                    sliderPos[3]--;
+                    sliderMove.play();
+                }
+                if (childrenSlider[3].x < pointer.worldX && sliderPos[3] < 7){
+                    sliderPos[3]++;
+                    sliderMove.play();
+                }
+            }
+                
+        },this);
+
+        bttn.on('pointerdown', function (pointer, gameObject) {
+            soundBttn.play();
+            if (slidersWin && switchesWin){
+                imgFin.setDepth(99);
+                imgFin.visible = true;
+                soundTrain.play();
+            }
+        },this);
+
+    }
+
+    function onBlink ()
+    {
+        var childrenLight = groupLightsControl.getChildren();
+        if (lampNum == 2){
+            childrenLight[4].visible = true;
+        }
+        if (lampNum == 1){
+            if (sliderMainInstalled && sliderControlInstalled){
+                var k = 0;
+                for (var i = 0; i < 4; i++){
+                    if (sliderPos[i] == sliderPosWin[i]) k++;
+                }
+                if (k == 4) {
+                    childrenLight[2].visible = true;
+                    childrenLight[3].visible = false;
+                } else {
+                    childrenLight[2].visible = false;
+                    childrenLight[3].visible = true;
+                }
+            }
+            
+        }
+        
+        lampNum--;
+    }
+
+
+        function updateMainScene0()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateMainSceneL()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateMainSceneR()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateWardrobeScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateSportsbagScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateTreadmillScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateBedScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateMapScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateBoardScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateShelfScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateLaptopScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateDeskScene()
+        { 
+            var pointer = this.input.activePointer;
+            text.setText([
+                'x: ' + pointer.worldX,
+                'y: ' + pointer.worldY,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+        }
+
+        function updateControl() {       
+            var pointer = this.input.activePointer;
+        }
+
+        function playAmbient() {
+            click.play();
+            if (ambient.isPlaying) {
+                ambient.pause();
+            } else {
+                if (ambientOn) {
+                    ambient.resume();
+                } else {
+                    ambientOn = true;
+                    ambient.play();
+                }
+            }
+        }
+
+        function onSleep() {
+            this.scene.start('MainScene0');
+          //  this.cameras.main.fadeIn(6000);
+        }
+
+    </script>
+
+</body>
+</html>
