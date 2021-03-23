@@ -5,7 +5,7 @@
     <script src='src/phaser-arcade-physics.min.js'></script>
 </head>
 <body>
-
+<meta name="viewport" content="width=device-width, initial-scale=0.5">
     <script>
 
     var Preloader = new Phaser.Class({
