@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <script src='src/phaser-arcade-physics.min.js'></script>
 </head>
 <body>
@@ -20,28 +21,14 @@
 
         preload: function ()
         {
-            this.load.image('imgMainScene', 'assets/background/scene1.0.jpg');
-            this.load.image('imgMainSceneShelf', 'assets/background/scene1.1.jpg');
-            this.load.image('imgMainSceneSwitches', 'assets/background/scene2.0.jpg');
-            this.load.image('imgFin', 'assets/background/scene2.1.jpg');
+ 
 
-
-            this.load.image('imgAC0', 'assets/bookAC/0.jpg');
-            this.load.image('imgAC1', 'assets/bookAC/1.jpg');
-            this.load.image('imgAC2', 'assets/bookAC/2.jpg');
-            this.load.image('imgAC3', 'assets/bookAC/3.jpg');
-            this.load.image('imgAC4', 'assets/bookAC/4.jpg');
-            this.load.image('imgAC5', 'assets/bookAC/5.jpg');
-            this.load.image('imgAC6', 'assets/bookAC/6.jpg');
-            this.load.image('imgAC7', 'assets/bookAC/7.jpg');
-            this.load.image('imgAC8', 'assets/bookAC/8.jpg');
             
-            this.load.image('imgSM1', 'assets/serviceManual/1.jpg');
-            this.load.image('imgSM2', 'assets/serviceManual/2.jpg');
-            
-            this.load.image('imgLampMain', 'assets/sprites/lampOnSceneMain.png');
-            this.load.image('imgLampControl', 'assets/sprites/lampOnSceneControl.png');
-
+            this.load.image('imgReady', 'assets/sprites/ready.png');
+            this.load.image('imgSteady', 'assets/sprites/steady.png');
+            this.load.image('imgGo', 'assets/sprites/go.png');
+            this.load.image('imgStep', 'assets/sprites/step.png');
+   
             this.load.image('imgSwOnMain', 'assets/sprites/swOnSceneMain.png');
             this.load.image('imgSwOffMain', 'assets/sprites/swOffSceneMain.png');
             this.load.image('imgSwOnControl', 'assets/sprites/swOnSceneControl.png');
@@ -57,6 +44,11 @@
             this.load.image('imgLightOnMain', 'assets/sprites/onLightSceneMain.png');
             this.load.image('imgLightOffMain', 'assets/sprites/offLightSceneMain.png');
             this.load.image('imgStart', 'assets/sprites/start.png');
+
+            this.load.audio('mp3stepL', 'assets/sound/stepL.mp3');
+            this.load.audio('mp3stepR', 'assets/sound/stepR.mp3');
+            this.load.audio('mp3breath', 'assets/sound/breath.mp3');
+            this.load.audio('mp3fanfair', 'assets/sound/fanfair.mp3');
 
             this.load.audio('mp3drawerClose', 'assets/sound/drawerClose.mp3');
             this.load.audio('mp3drawerOpen', 'assets/sound/drawerOpen.mp3');
@@ -75,11 +67,9 @@
             this.load.audio('mp3wOpen', 'assets/sound/wardrobeOpen.mp3');
             this.load.audio('mp3wClose', 'assets/sound/wardrobeClose.mp3');
            
-            this.load.audio('ambient', ['assets/ambient/Ketsa - Biscuits.mp3',
-                'assets/ambient/Ketsa - Summer-Man.mp3',
-                'assets/ambient/Ketsa - Summer-Sessions.mp3',
-                'assets/ambient/Ketsa - Why-Wait.mp3',
-                'assets/ambient/Ketsa - Worked-Out.mp3']);
+            this.load.audio('mp3ambient', 'assets/ambient/Ketsa.mp3');
+            this.load.audio('mp3run', 'assets/ambient/run.mp3');
+            this.load.audio('mp3treadmill', 'assets/ambient/treadmill.mp3');
             
             this.load.image('book1.0', 'assets/books/1.0.jpg');
             this.load.image('book1.1', 'assets/books/1.1.jpg');
@@ -111,7 +101,7 @@
         create: function ()
         {
             this.scene.start('StartScene');
-            ambient = this.sound.add('ambient',  { loop: -1, volume: 0.05 });      
+            ambient = this.sound.add('mp3ambient',  { loop: 1, volume: 0.05 });      
             click = this.sound.add('mp3SoundBttn', { volume: 2 });
         }
         
@@ -462,7 +452,9 @@
         var sportsbagOpen = true;    
         var wardrobeOpen = false;    
         var headBandPacked = false;    
-    
+        var treadmillRun = false;
+        var timerTreadmill;
+
     var game = new Phaser.Game(config);
 
         function createStartScene() {
@@ -473,7 +465,7 @@
                 //this.scene.switch('MainScene0');
 
                 this.cameras.main.fadeOut(1000);
-                timedEvent = this.time.addEvent({ delay: 1250, callback: onSleep, callbackScope: this, repeat: 0, startAt: 0 });
+                timedEvent = this.time.addEvent({ delay: 1250, callback: () => { this.scene.start('MainScene0'); }, callbackScope: this, repeat: 0, startAt: 0 });
 
             }, this);
 
@@ -500,6 +492,8 @@
         function preloadSportsbagScene() {
 
         }
+
+        
 
         function preloadTreadmillScene() {
 
@@ -908,49 +902,195 @@
             }, this);
 
         }
-
+        var tap = 0;
         function createTreadmillScene()
         {
 
-            var imgScene = this.add.image(0, 0, 'imgTreadmill').setOrigin(0);
+            imgScene = this.add.image(0, 0, 'imgTreadmill').setOrigin(0);
+            var imgReady = this.add.image(1150, 0, 'imgReady').setOrigin(0);
+            var imgSteady = this.add.image(1150, 0, 'imgSteady').setOrigin(0);
+            var imgGo = this.add.image(1150, 0, 'imgGo').setOrigin(0);
+
+            imgReady.visible = false;
+            imgSteady.visible = false;
+            imgGo.visible = false;
+
+
+            
+
+            var fxTreadmill = this.sound.add('mp3treadmill', { loop: 1, volume: 0.06 });
+            var bgTreadmill = this.sound.add('mp3run');
+
+            var fxStepL = this.sound.add('mp3stepL', {  volume: 0.25 });
+            var fxStepR = this.sound.add('mp3stepR', { volume: 0.25 });
+            var stepL = true;
 
             var sprite_mainRight = this.add.sprite(0, 0); 
-            var sprite_treadmillStart = this.add.sprite(0, 0); 
             var sprite_treadmill = this.add.sprite(0, 0);
-
-            var plgn_mainRight = new Phaser.Geom.Polygon([      0, 0,       1920, 0,       1920, 1080,         0, 1080]);
+            var sprite_treadmillStart = this.add.sprite(0, 0); 
+            var step = this.add.sprite(1050, 500, 'imgStep').setOrigin().setScale(1);
+            step.visible = false;
+            var plgn_mainRight = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
             var plgn_treadmillStart = new Phaser.Geom.Polygon([          630, 620,       1020, 620,       1020, 810,       630, 810]);
             var plgn_treadmill = new Phaser.Geom.Polygon([            450, 0,         1280, 0,        1280, 1080,      450, 1080]);
 
-            var graphics = this.add.graphics();
+            //var graphics = this.add.graphics();
            
             //graphics.fillStyle(0xaaaaff);
             //graphics.fillPoints(plgn_treadmill.points, true);
             //graphics.fillStyle(0xaaeaee);
             //graphics.fillPoints(plgn_treadmillStart.points, true);
 
-            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
+            text = this.add.text(500, 10, '', { fill: '#aaffff' }).setDepth(1);
 
             this.input.mouse.disableContextMenu();
 
             this.input.topOnly = true;
-
+            
             sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
-            sprite_treadmillStart.setInteractive(plgn_treadmillStart, Phaser.Geom.Polygon.Contains);
             sprite_treadmill.setInteractive(plgn_treadmill, Phaser.Geom.Polygon.Contains);
+            sprite_treadmillStart.setInteractive(plgn_treadmillStart, Phaser.Geom.Polygon.Contains);
 
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
 
                 this.scene.switch('MainSceneR');
+               
+            }, this);
+
+            step.on('pointerdown', function (pointer, gameObject) {
+                tap += 10;
+                step.visible = false;
+                step.disableInteractive();
+                if (stepL) {
+                    fxStepL.play();
+                } else {
+                    fxStepR.play();
+                }
+                stepL = !stepL;
 
             }, this);
-            
-           
 
             sprite_treadmillStart.on('pointerdown', function (pointer, gameObject) {
+                if (!treadmillRun) {
+                    treadmillRun = true;
+                    if (ambient.isPlaying) {
+                        ambient.pause();
+                    }
+                    sprite_mainRight.disableInteractive();
+                    //sprite_mainRight.stopPropagation();
+                    var fxBttn = this.sound.add('mp3Bttn');
+                    fxBttn.play();
+                    //timerTreadmill = this.sys.game.loop.time;
+
+                    timedEvent = this.time.addEvent({
+                        delay: 1000, callback: () => {
+
+                            fxTreadmill.play();
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    timedEvent = this.time.addEvent({
+                        delay: 4000, callback: () => {
+
+                            bgTreadmill.play();
+                            imgReady.visible = true;
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    timedEvent = this.time.addEvent({
+                        delay: 4480, callback: () => {
+
+                            imgReady.visible = false;
+                            imgSteady.visible = true;
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    timedEvent = this.time.addEvent({
+                        delay: 4960, callback: () => {
+
+                            imgSteady.visible = false;
+                            imgGo.visible = true;
+                           // step.visible = true;
+                           // step.setInteractive();
+                            timedEvent2 = this.time.addEvent({
+                                delay: 480, callback: () => {
+                                    if (!step.visible) {
+                                        step.visible = true;
+                                        step.setInteractive();
+                                    }
+
+                                }, callbackScope: this, repeat: 61, startAt: 0
+                            });
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    timedEvent = this.time.addEvent({
+                        delay: 5440, callback: () => {
+
+                            
+                            imgGo.visible = false;
+                           
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
 
 
+
+                    timedEvent = this.time.addEvent({
+                        delay: 35100, callback: () => {
+
+                         
+                            if (tap < 600) {
+                                fxBreath = this.sound.add('mp3breath');
+                                fxBreath.play();
+                            } else {
+                                fxBreath = this.sound.add('mp3fanfair');
+                                fxBreath.play();
+                                
+                                sprite_treadmillStart.disableInteractive();
+                            }
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    
+                    timedEvent = this.time.addEvent({
+                        delay: 35160, callback: () =>  {
+
+                            imgGo.visible = false;
+                            treadmillRun = false;
+                            fxTreadmill.stop();
+                            bgTreadmill.stop();
+                           
+                            if (tap < 600) {
+                                fxBreath = this.sound.add('mp3breath');
+                                fxBreath.play();
+                            } else {
+                                sprite_treadmillStart.disableInteractive();
+                            }
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    timedEvent = this.time.addEvent({
+                        delay: 35250, callback: () =>  {
+
+                           
+                            step.visible = false;
+                            step.disableInteractive();
+                            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+
+                           
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+                    
+                }
+                
             }, this);
 
         }
@@ -1009,7 +1149,13 @@
                 fxYawn.play(); 
 
                 this.cameras.main.fadeOut(3000);
-                timedEvent = this.time.addEvent({ delay: 3250, callback: onSleep, callbackScope: this, repeat: 0, startAt: 0 });
+                timedEvent = this.time.addEvent({
+                    delay: 3250, callback: () => {
+
+                        this.scene.start('MainScene0');
+
+                    }, callbackScope: this, repeat: 0, startAt: 0
+                    });
 
             }, this);
 
@@ -1024,7 +1170,6 @@
                 this.scene.switch('BooksSceneR');
 
             }, this);
-
 
             sprite_map.on('pointerdown', function (pointer, gameObject) {
 
@@ -1168,13 +1313,13 @@
             var sprite_laptop = this.add.sprite(0, 0);
 
             var plgn_mainLeft = new Phaser.Geom.Polygon([830, 710, 1920, 670, 1920, 1080, 830, 1080]);
-            var plgn_board = new Phaser.Geom.Polygon([250, 0, 1920, 0, 100, 1920, 250, 120]);
+            var plgn_board = new Phaser.Geom.Polygon([250, 0, 1920, 0, 1920, 100, 250, 120]);
             var plgn_shelf = new Phaser.Geom.Polygon([100, 730, 770, 700, 770, 1080, 100, 1080]);
             var plgn_laptop = new Phaser.Geom.Polygon([860, 210, 1200, 130, 1360, 490, 1020, 600]);
 
             //var graphics = this.add.graphics();
             //graphics.fillStyle(0xffaa00);
-            //graphics.fillPoints(plgn_map.points, true);
+            //graphics.fillPoints(plgn_board.points, true);
 
             text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
 
@@ -1649,13 +1794,17 @@
 
         function updateTreadmillScene()
         { 
+ 
             var pointer = this.input.activePointer;
             text.setText([
                 'x: ' + pointer.worldX,
                 'y: ' + pointer.worldY,
                 'isDown: ' + pointer.isDown,
-                'rightButtonDown: ' + pointer.rightButtonDown()
+                'rightButtonDown: ' + pointer.rightButtonDown(),
+                'tap: ' + tap
             ]);
+            
+            
         }
 
         function updateBedScene()
@@ -1742,10 +1891,8 @@
             }
         }
 
-        function onSleep() {
-            this.scene.start('MainScene0');
-          //  this.cameras.main.fadeIn(6000);
-        }
+ 
+
 
     </script>
 
