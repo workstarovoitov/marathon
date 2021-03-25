@@ -5,7 +5,7 @@
     <script src='src/phaser-arcade-physics.min.js'></script>
 </head>
 <body>
-<meta name="viewport" content="width=device-width, initial-scale=0.5">
+
     <script>
 
     var Preloader = new Phaser.Class({
@@ -27,24 +27,10 @@
             this.load.image('imgReady', 'assets/sprites/ready.png');
             this.load.image('imgSteady', 'assets/sprites/steady.png');
             this.load.image('imgGo', 'assets/sprites/go.png');
-            this.load.image('imgStep', 'assets/sprites/step.png');
+            this.load.image('imgFaster', 'assets/sprites/faster.png');
+            this.load.image('imgGood', 'assets/sprites/good.png');
+            this.load.image('imgStep', 'assets/sprites/run3.png');
    
-            this.load.image('imgSwOnMain', 'assets/sprites/swOnSceneMain.png');
-            this.load.image('imgSwOffMain', 'assets/sprites/swOffSceneMain.png');
-            this.load.image('imgSwOnControl', 'assets/sprites/swOnSceneControl.png');
-            this.load.image('imgSwOffControl', 'assets/sprites/swOffSceneControl.png');
-
-            this.load.image('imgPinMain', 'assets/sprites/pinMain.png');
-            this.load.image('imgPinControl', 'assets/sprites/pinControl.png');
-            this.load.image('imgPinUnconnected', 'assets/sprites/pinUnconnected.png');
-
-            this.load.image('imgLightOnControl', 'assets/sprites/onLightSceneControl.png');
-            this.load.image('imgLightOffControl', 'assets/sprites/offLightSceneControl.png');
-
-            this.load.image('imgLightOnMain', 'assets/sprites/onLightSceneMain.png');
-            this.load.image('imgLightOffMain', 'assets/sprites/offLightSceneMain.png');
-            this.load.image('imgStart', 'assets/sprites/start.png');
-
             this.load.audio('mp3stepL', 'assets/sound/stepL.mp3');
             this.load.audio('mp3stepR', 'assets/sound/stepR.mp3');
             this.load.audio('mp3breath', 'assets/sound/breath.mp3');
@@ -52,14 +38,9 @@
 
             this.load.audio('mp3drawerClose', 'assets/sound/drawerClose.mp3');
             this.load.audio('mp3drawerOpen', 'assets/sound/drawerOpen.mp3');
-            this.load.audio('mp3SwOn', 'assets/sound/swOn.mp3');
-            this.load.audio('mp3SwOff', 'assets/sound/swOff.mp3');
-            this.load.audio('mp3SliderInstalled', 'assets/sound/sliderInstalled.mp3');
-            this.load.audio('mp3SliderMove', 'assets/sound/sliderMove.mp3');
-            this.load.audio('mp3PowerOn', 'assets/sound/powerOn.mp3');
             this.load.audio('mp3Bttn', 'assets/sound/bttn.mp3');
-            this.load.audio('mp3Train', 'assets/sound/train.mp3');
             this.load.audio('mp3cock', 'assets/sound/cock.mp3');
+
             this.load.audio('mp3SoundBttn', 'assets/sound/soundBttn.mp3');
             this.load.audio('mp3yawn', 'assets/sound/yawn.mp3');
             this.load.audio('mp3zip', 'assets/sound/zip.mp3');
@@ -77,9 +58,9 @@
             this.load.image('book2.0', 'assets/books/2.0.jpg');
             this.load.image('book2.1', 'assets/books/2.1.jpg');
             this.load.image('book2.2', 'assets/books/2.2.jpg');
-            this.load.image('book3.0', 'assets/books/2.0.jpg');
-            this.load.image('book3.1', 'assets/books/2.1.jpg');
-            this.load.image('book3.2', 'assets/books/2.2.jpg');
+            this.load.image('book3.0', 'assets/books/3.0.jpg');
+            this.load.image('book3.1', 'assets/books/3.1.jpg');
+            this.load.image('book3.2', 'assets/books/3.2.jpg');
 
             this.load.image('imgStartBG', 'assets/background/start.jpg');
             this.load.image('imgWakeUp', 'assets/background/sceneMain0.jpg');
@@ -314,60 +295,11 @@
 
         });
 
-
-
-    var BookAC = new Phaser.Class({
-
-        Extends: Phaser.Scene,
-
-        initialize:
-
-        function BookAC ()
-        {
-            Phaser.Scene.call(this, { key: 'BookAC', active: false });
-        },
-        preload: preloadBookAC,
-        create: createBookAC
-
-    });
-
-    var ServiceManual= new Phaser.Class({
-
-        Extends: Phaser.Scene,
-
-        initialize:
-
-        function ServiceManual ()
-        {
-            Phaser.Scene.call(this, { key: 'ServiceManual', active: false });
-        },
-        preload: preloadBookAC,
-        create: createServiceManual
-
-    });
-
-    var MainSceneSwitches = new Phaser.Class({
-
-        Extends: Phaser.Scene,
-
-        initialize:
-
-        function MainSceneSwitches ()
-        {
-            Phaser.Scene.call(this, { key: 'MainSceneSwitches', active: false });
-        },
-       // preload: preloadMainSceneSwitches,
-        create: createMainSceneSwitches,
-        update: updateControl
-    });
-
-
-
         var config = {
             type: Phaser.AUTO,
-            backgroundColor: 'black',
+            backgroundColor: 'white',
             scale: {
-            mode: Phaser.Scale.ENVELOP,
+                mode: Phaser.Scale.FIT,
             parent: 'phaser-example',
             width: 1920,
             height: 1080,
@@ -383,68 +315,7 @@
             scene: [Preloader, LaptopScene, DeskScene, ShelfScene, BoardScene, MapScene, BedScene, TreadmillScene, SportsbagScene, WardrobeScene, MainSceneR, MainSceneL, MainScene0, StartScene],
             audio: { disableWebAudio: true }
         };
-
-    var text1;
-    var text2;
-    var name;
-    var fxDrawerOpen;
-    var fxDrawerClose;
-    var pageAC = 0;
-    var pageSM;
-    var manualOpenedFromMain = true;
-    var switchesStates = [  false, false, false, false,
-                            false, false, false, false,
-                            false, false, false, false,
-                            false, false, false, false];
-    var switchesStatesWin = [  false, false, false, true,
-                            true, false, true, true,
-                            false, false, false, true,
-                            true, false, false, true];
-
-    var lampsMainXY = [ [197, 400], [294, 425], [288, 377], [258, 482],
-                        [335, 480], [394, 464], [350, 517], [445, 498],
-                        [392, 502], [502, 431], [487, 521], [553, 536],
-                        [614, 570], [659, 496], [558, 453], [709, 582]];
-    var switchesMainXY = [ [855, 278], [882, 278], [910, 278], [937, 278],
-                        [855, 351], [882, 350], [910, 350], [937, 348],
-                        [856, 427], [883, 425], [911, 423], [938, 421],
-                        [856, 498], [883, 496], [911, 493], [938, 490]];
-    var sliderPos = [2, 2, 2, 2];
-    var sliderPosWin = [4, 2, 6, 5];
-    var sliderEnable = [true, true, false, false];
-    var sliderMainInstalled = false;
-    var sliderControlInstalled = false;
-
-    var slidersWin = false;
-    var switchesWin = false;
-    
-    var sliderMainStartXY = [[920, 583], [919, 628], [1087, 558], [1087, 600]];
-    var sliderMainEndXY = [[1030, 565], [1029, 608], [1184, 543], [1184, 581]];
-    
-    var sliderControlStartXY = [[1175, 642], [1175, 708], [1490, 642], [1490, 708]];
-    var sliderControlEndXY = [[1388, 642], [1388, 708], [1704, 642], [1704, 708]];
-
-    var lampsControlXY = [ [252, 329], [347, 364], [347, 312], [307, 423],
-                        [387, 427], [454, 415], [400, 475], [510, 462],
-                        [448, 459], [582, 388], [555, 494], [638, 520],
-                        [713, 573], [779, 484], [648, 418], [848, 605]];
-    var switchesControlXY = [ [1068, 213], [1119, 213], [1169, 213], [1214, 213],
-                        [1068, 313], [1117, 313], [1166, 313], [1214, 313],
-                        [1068, 413], [1117, 413], [1166, 413], [1214, 413],
-                        [1068, 513], [1117, 513], [1166, 513], [1214, 513]];
-    
-    var test;
-    var groupLampsMain;
-    var groupSwitchesMain;
-    var groupLampsControl;
-    var groupSwitchesControl;
-    var groupSliderMain;
-    var groupSliderControl;
-    var groupLightsMain;
-    var groupLightsControl;
-    var blinkEvent
-    var pinMain;
-
+  
         var ambient;    
         var cick;    
         var ambientOn = false;    
@@ -455,7 +326,8 @@
         var treadmillRun = false;
         var timerTreadmill;
 
-    var game = new Phaser.Game(config);
+
+        var game = new Phaser.Game(config);
 
         function createStartScene() {
 
@@ -902,18 +774,23 @@
             }, this);
 
         }
+
         var tap = 0;
         function createTreadmillScene()
         {
 
             imgScene = this.add.image(0, 0, 'imgTreadmill').setOrigin(0);
-            var imgReady = this.add.image(1150, 0, 'imgReady').setOrigin(0);
-            var imgSteady = this.add.image(1150, 0, 'imgSteady').setOrigin(0);
-            var imgGo = this.add.image(1150, 0, 'imgGo').setOrigin(0);
+            var imgReady = this.add.image(1050, 60, 'imgReady').setOrigin(0).setScale(0.2);
+            var imgSteady = this.add.image(1050, 60, 'imgSteady').setOrigin(0).setScale(0.2);
+            var imgGo = this.add.image(1050, 60, 'imgGo').setOrigin(0).setScale(0.2);
+            var imgFaster = this.add.image(1050, 60, 'imgFaster').setOrigin(0).setScale(0.2);
+            var imgGood = this.add.image(1050, 60, 'imgGood').setOrigin(0).setScale(0.2);
 
             imgReady.visible = false;
             imgSteady.visible = false;
             imgGo.visible = false;
+            imgFaster.visible = false;
+            imgGood.visible = false;
 
 
             
@@ -928,7 +805,7 @@
             var sprite_mainRight = this.add.sprite(0, 0); 
             var sprite_treadmill = this.add.sprite(0, 0);
             var sprite_treadmillStart = this.add.sprite(0, 0); 
-            var step = this.add.sprite(1050, 500, 'imgStep').setOrigin().setScale(1);
+            var step = this.add.sprite(850, 950, 'imgStep').setOrigin().setScale(0.225);
             step.visible = false;
             var plgn_mainRight = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
             var plgn_treadmillStart = new Phaser.Geom.Polygon([          630, 620,       1020, 620,       1020, 810,       630, 810]);
@@ -1001,7 +878,7 @@
                     });
 
                     timedEvent = this.time.addEvent({
-                        delay: 4480, callback: () => {
+                        delay: 4487.80, callback: () => {
 
                             imgReady.visible = false;
                             imgSteady.visible = true;
@@ -1010,27 +887,27 @@
                     });
 
                     timedEvent = this.time.addEvent({
-                        delay: 4960, callback: () => {
+                        delay: 4975.61, callback: () => {
 
                             imgSteady.visible = false;
                             imgGo.visible = true;
                            // step.visible = true;
                            // step.setInteractive();
                             timedEvent2 = this.time.addEvent({
-                                delay: 480, callback: () => {
+                                delay: 487.80, callback: () => {
                                     if (!step.visible) {
                                         step.visible = true;
                                         step.setInteractive();
                                     }
 
-                                }, callbackScope: this, repeat: 61, startAt: 0
+                                }, callbackScope: this, repeat: 58, startAt: 0
                             });
 
                         }, callbackScope: this, repeat: 0, startAt: 0
                     });
 
                     timedEvent = this.time.addEvent({
-                        delay: 5440, callback: () => {
+                        delay: 5463.41, callback: () => {
 
                             
                             imgGo.visible = false;
@@ -1042,16 +919,42 @@
 
 
                     timedEvent = this.time.addEvent({
-                        delay: 35100, callback: () => {
+                        delay: 18650, callback: () => {
 
                          
-                            if (tap < 600) {
+                            if (tap < 200) {
+                                imgFaster.visible = true;
+                            }
+                            if (tap > 260) {
+                                imgGood.visible = true;
+                            }
+
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+
+                    timedEvent = this.time.addEvent({
+                        delay: 20650, callback: () => {
+
+                            imgFaster.visible = false;
+                            imgGood.visible = false;
+                    
+                        }, callbackScope: this, repeat: 0, startAt: 0
+                    });
+
+                    timedEvent = this.time.addEvent({
+                        delay: 34300, callback: () => {
+
+                            imgFaster.visible = false;
+                            imgGood.visible = false;
+                            if (tap < 580) {
                                 fxBreath = this.sound.add('mp3breath');
                                 fxBreath.play();
+                                tap = 0;
                             } else {
                                 fxBreath = this.sound.add('mp3fanfair');
                                 fxBreath.play();
-                                
+                               
                                 sprite_treadmillStart.disableInteractive();
                             }
 
@@ -1060,31 +963,26 @@
 
                     
                     timedEvent = this.time.addEvent({
-                        delay: 35160, callback: () =>  {
+                        delay: 34740, callback: () =>  {
 
-                            imgGo.visible = false;
+                           // imgGo.visible = false;
                             treadmillRun = false;
                             fxTreadmill.stop();
                             bgTreadmill.stop();
-                           
-                            if (tap < 600) {
-                                fxBreath = this.sound.add('mp3breath');
-                                fxBreath.play();
-                            } else {
-                                sprite_treadmillStart.disableInteractive();
-                            }
+                            step.visible = false;
+                            step.disableInteractive();
+                            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+
+                          
 
                         }, callbackScope: this, repeat: 0, startAt: 0
                     });
 
                     timedEvent = this.time.addEvent({
-                        delay: 35250, callback: () =>  {
+                        delay: 35000, callback: () =>  {
 
                            
-                            step.visible = false;
-                            step.disableInteractive();
-                            sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
-
+                           
                            
                         }, callbackScope: this, repeat: 0, startAt: 0
                     });
@@ -1373,370 +1271,7 @@
 
 
 
-    function preloadBookAC ()
-    {
-        this.load.audio('mp3page', 'assets/sound/page.mp3');
-    }
-
-    function createBookAC ()
-    {
-        //this.add.image(0, 0, 'imgAC' + pageAC).setOrigin(0);    
-        groupPagesAC = this.add.group();
-        for (var i = 0; i <= 8; i++) {
-            groupPagesAC.create(0, 0, 'imgAC' + i).setOrigin(0);
-        }
-        var childPagesAC = groupPagesAC.getChildren();
-        for (var i = 0; i < 9; i++) {
-            childPagesAC[i].visible = false;
-        }
-        childPagesAC[pageAC].visible = true;
-        var sprite_background = this.add.sprite(0, 0);
-        var sprite_leftPage = this.add.sprite(0, 0);
-        var sprite_rightPage = this.add.sprite(0, 0);
-       
-        var plgn_background = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
-        var plgn_leftPage = new Phaser.Geom.Polygon([300, 170, 880, 120, 940, 1020, 300, 1060]);
-        var plgn_rightPage = new Phaser.Geom.Polygon([920, 115, 1490, 90, 1590, 965, 970, 1025]);
-
-        this.input.topOnly = true;
-        sprite_background.setInteractive(plgn_background, Phaser.Geom.Polygon.Contains);
-        sprite_leftPage.setInteractive(plgn_leftPage, Phaser.Geom.Polygon.Contains);
-        sprite_rightPage.setInteractive(plgn_rightPage, Phaser.Geom.Polygon.Contains);
-        text2 = this.add.text(10, 10, '', { fill: '#00ff00' });
-        sprite_leftPage.on('pointerdown', function (pointer, gameObject) {
-            this.sound.play('mp3page');
-           childPagesAC[pageAC].visible = false;
-            if (pageAC > 0) {
-                
-                pageAC--;
-            }
-            childPagesAC[pageAC].visible = true;
-        },this);
-
-        sprite_rightPage.on('pointerdown', function (pointer, gameObject) {
-            this.sound.play('mp3page');
-            childPagesAC[pageAC].visible = false;
-            if (pageAC < 8) {
-                
-                pageAC++;
-            }
-            childPagesAC[pageAC].visible = true;
-        },this);
-       
-        sprite_background.on('pointerdown', function (pointer, gameObject) {
-            this.scene.switch('Main');
-       },this);
-
-    }
-
-    function createServiceManual ()
-    {
-        page2 = this.add.image(0, 0, 'imgSM2').setOrigin(0);  
-        page1 = this.add.image(0, 0, 'imgSM1').setOrigin(0);  
-        page2.visible = false;
-        var firstPage = true;
-        var sprite_background = this.add.zone(0, 0).setOrigin(0);
-        var sprite_page = this.add.zone(0, 0).setOrigin(0);
-        
-        var plgn_background = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
-        var plgn_page = new Phaser.Geom.Polygon([260, 40, 1660, 100, 1660, 1020, 200, 970]);
-        
-        this.input.topOnly = true;
-        sprite_background.setInteractive(plgn_background, Phaser.Geom.Polygon.Contains);
-        sprite_page.setInteractive(plgn_page, Phaser.Geom.Polygon.Contains);
-       
-        sprite_page.on('pointerdown', function (pointer, gameObject) {
-            this.sound.play('mp3page');
-
-            if (firstPage) {
-                firstPage = false;
-                page2.visible = true;
-                page1.visible = false;
-                //this.add.image(0, 0, 'imgSM2').setOrigin(0);
-            }else{
-                firstPage = true;
-                page2.visible = false;
-                page1.visible = true;
-                
-                //this.add.image(0, 0, 'imgSM1').setOrigin(0);
-            }           
-        },this);
-       
-        sprite_background.on('pointerdown', function (pointer, gameObject) {
-            if (manualOpenedFromMain){
-                this.scene.switch('Main');
-            }else{
-                this.scene.switch('MainSceneSwitches');
-            }
-            
-       },this);
-
-    }
-
-    
-
-    function createMainSceneSwitches ()
-    {
-        this.add.image(0, 0, 'imgMainSceneSwitches').setOrigin(0);    
-        var imgFin = this.add.image(0, 0, 'imgFin').setOrigin(0).setInteractive();; 
-        imgFin.visible = false;
-       // text1 = this.add.text(500, 300, '', { fill: '#00ff00' });
-       // text2 = this.add.text(500, 500, '', { fill: '#00ff00' });
-        var fxOn = this.sound.add('mp3SwOn');
-        var fxOff = this.sound.add('mp3SwOff');    
-        var sliderMove = this.sound.add('mp3SliderMove');    
-        var sliderInstalled = this.sound.add('mp3SliderInstalled');    
-        var powerOn = this.sound.add('mp3PowerOn');   
-        var soundBttn = this.sound.add('mp3Bttn');   
-        var soundTrain = this.sound.add('mp3Train');    
-
-        var zoneBackground = this.add.zone(0, 0).setOrigin(0); 
-        var zoneBooks = this.add.zone(0, 0).setOrigin(0);
-        var zoneSwitchesAll = this.add.zone(0, 0).setOrigin(0);
-        
-        var zoneSlider0 = this.add.zone(0, 0).setOrigin(0);
-        var zoneSlider1 = this.add.zone(0, 0).setOrigin(0);
-        var zoneSlider2 = this.add.zone(0, 0).setOrigin(0);
-        var zoneSlider3 = this.add.zone(0, 0).setOrigin(0);
-        zoneSlider0.setName('zSlider0');
-        zoneSlider1.setName('zSlider1');
-        zoneSlider2.setName('zSlider2');
-        zoneSlider3.setName('zSlider3');
-
-        zoneBackground.setName('zBackground');
-        zoneBooks.setName('zBooks');
-        zoneSwitchesAll.setName('zSwitchesAll');
-       
-        var plgnBackground = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
-        var plgnBooks = new Phaser.Geom.Polygon([945, 825, 1125, 795, 1240, 820, 1065, 870]);
-        var plgnSwitchesAll = new Phaser.Geom.Polygon([1030, 100, 1920, 100, 1920, 770, 1030, 770]);
-        
-        var plgnSlider0 = new Phaser.Geom.Polygon([1110, 605, 1410, 605, 1410, 655, 1110, 655]);
-        var plgnSlider1 = new Phaser.Geom.Polygon([1110, 675, 1410, 675, 1410, 730, 1110, 730]);
-
-        var plgnSlider2 = new Phaser.Geom.Polygon([1420, 605, 1730, 605, 1730, 655, 1420, 655]);
-        var plgnSlider3 = new Phaser.Geom.Polygon([1420, 675, 1730, 675, 1730, 730, 1420, 730]);
-
-        this.input.topOnly = true;
-        
-        zoneBackground.setInteractive(plgnBackground, Phaser.Geom.Polygon.Contains);
-        zoneBooks.setInteractive(plgnBooks, Phaser.Geom.Polygon.Contains);
-        zoneSwitchesAll.setInteractive(plgnSwitchesAll, Phaser.Geom.Polygon.Contains);
-        
-        zoneSlider0.setInteractive(plgnSlider0, Phaser.Geom.Polygon.Contains);
-        zoneSlider1.setInteractive(plgnSlider1, Phaser.Geom.Polygon.Contains);
-        zoneSlider2.setInteractive(plgnSlider2, Phaser.Geom.Polygon.Contains);
-        zoneSlider3.setInteractive(plgnSlider3, Phaser.Geom.Polygon.Contains);
-        
-        zoneSlider0.input.dropZone = false;
-        zoneSlider1.input.dropZone = false;
-        zoneSlider2.input.dropZone = true;
-        zoneSlider3.input.dropZone = true;
-
-        zoneSwitchesAll.input.dropZone = false;
-        zoneBooks.input.dropZone = false;
-        zoneBackground.input.dropZone = false;
-
-        var pin = this.add.sprite(1252, 882, 'imgPinUnconnected').setScale(0.4).setInteractive();
-        var bttn = this.add.sprite(1716, 351, 'imgStart').setScale(1.05).setInteractive();
-        this.input.setDraggable(pin);
-
-        this.input.topOnly = true;
-        
-        groupLampsControl = this.add.group();
-        groupSwitchesControl = this.add.group();
-        groupSliderControl = this.add.group();
-        groupLightsControl = this.add.group();
-        for (var i = 0; i < 16; i++) {
-            groupLampsControl.create(lampsControlXY[i][0], lampsControlXY[i][1] , 'imgLampControl').setScale(0.64);
-            var swOffSprite = groupSwitchesControl.create(switchesControlXY[i][0], switchesControlXY[i][1] , 'imgSwOffControl');
-            var swOnSprite = groupSwitchesControl.create(switchesControlXY[i][0], switchesControlXY[i][1] , 'imgSwOnControl');
-            swOffSprite.name = i;
-            swOnSprite.name = i;
-        }
-
-        for (var i = 0; i < 4; i++) {
-            groupSliderControl.create(Math.abs(sliderControlStartXY[i][0]-sliderControlEndXY[i][0])/7*sliderPos[i]+sliderControlStartXY[i][0], sliderControlStartXY[i][1] - Math.abs(sliderControlStartXY[i][1]-sliderControlEndXY[i][1])/7*sliderPos[i], 'imgPinMain').setOrigin().setScale(0.75);
-        }
-        var childrenSlider = groupSliderControl.getChildren();
-        //this.input.setDraggable(childrenSlider);
-
-        for (var i = 0; i < 3; i++) {
-            var child = groupLightsControl.create(1372 + i*86 , 225, 'imgLightOnControl').setScale(0.64);
-            child.visible = false;
-            var child = groupLightsControl.create(1372 + i*86 , 225, 'imgLightOffControl').setScale(0.64);
-            child.visible = false;
-        }
-
-
-        groupSwitchesControl.inputEnableChildren = true;
-        groupSliderControl.inputEnableChildren = true;
-
-
-        //blinkEvent = this.time.addEvent({ delay: 500, callback: onBlink, callbackScope: this, repeat: 3 });
-
-
-        this.input.on('dragstart', function (pointer, gameObject) {
-
-            this.children.bringToTop(gameObject);
-
-        }, this);
-
-        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
-        });
-
-        this.input.on('drop', function (pointer, gameObject, dropZone) {
-            if (dropZone.name == 'zSlider2') {
-                if(sliderEnable[2]){
-                    gameObject.x = gameObject.input.dragStartX;
-                    gameObject.y = gameObject.input.dragStartY;
-                } else {
-                    sliderControlInstalled = true;
-                    sliderEnable[2] = true;
-                    sliderInstalled.play();
-                    if (sliderMainInstalled) powerOn.play();
-                    gameObject.destroy();
-                }
-            }
-            if (dropZone.name == 'zSlider3') {
-                if(sliderEnable[3]){
-                    gameObject.x = gameObject.input.dragStartX;
-                    gameObject.y = gameObject.input.dragStartY;
-                } else {
-                    sliderControlInstalled = true;
-                    sliderEnable[3] = true;
-                    sliderInstalled.play();
-                    if (sliderMainInstalled) powerOn.play();
-                    gameObject.destroy();
-                }
-            }
-            
-            
-            
-            event.stopPropagation();
-
-        });
-
-        this.input.on('dragend', function (pointer, gameObject, dropped) {
-            if (!dropped)
-            {
-                gameObject.x = gameObject.input.dragStartX;
-                gameObject.y = gameObject.input.dragStartY;
-            }
-        });
-
-        
-        this.input.setHitArea(groupSwitchesControl.getChildren()).on('gameobjectdown', function(pointer, gameObject) {
-            event.stopPropagation();
-            name = gameObject.name;
-            switchesStates[gameObject.name] = !switchesStates[gameObject.name];
-            if (name !== "" && name >= 0 && name <= 15){
-                 if (switchesStates[gameObject.name] == true) fxOn.play();
-                else fxOff.play();
-            }
-           
-        });
-        
-        zoneBackground.on('pointerdown', function (pointer, gameObject) {
-            //event.stopPropagation();
-            this.scene.switch('Main');
-        },this);
-
-        zoneBooks.on('pointerdown', function (pointer, gameObject) {
-            manualOpenedFromMain = false;
-            this.scene.switch('ServiceManual');
-        },this);
-
-        zoneSlider0.on('pointerdown', function (pointer, gameObject) {
-            if (childrenSlider[0].x > pointer.worldX && sliderPos[0] > 0){
-                sliderPos[0]--;
-                sliderMove.play();
-            }
-            if (childrenSlider[0].x < pointer.worldX && sliderPos[0] < 7){
-                sliderPos[0]++;
-                sliderMove.play();
-            }
-        },this);
-
-        zoneSlider1.on('pointerdown', function (pointer, gameObject) {
-            if (childrenSlider[1].x > pointer.worldX && sliderPos[1] > 0){
-                sliderPos[1]--;
-                sliderMove.play();
-            }
-            if (childrenSlider[1].x < pointer.worldX && sliderPos[1] < 7){
-                sliderPos[1]++;
-                sliderMove.play();
-            }
-        },this);
-
-        zoneSlider2.on('pointerdown', function (pointer, gameObject) {
-            if (sliderEnable[2]){
-                if (childrenSlider[2].x > pointer.worldX && sliderPos[2] > 0){
-                    sliderPos[2]--;
-                    sliderMove.play();
-                }
-                if (childrenSlider[2].x < pointer.worldX && sliderPos[2] < 7){
-                    sliderPos[2]++;
-                    sliderMove.play();
-                }
-            }
-                
-        },this);
-
-        zoneSlider3.on('pointerdown', function (pointer, gameObject) {
-            if (sliderEnable[3]){
-                if (childrenSlider[3].x > pointer.worldX && sliderPos[3] > 0){
-                    sliderPos[3]--;
-                    sliderMove.play();
-                }
-                if (childrenSlider[3].x < pointer.worldX && sliderPos[3] < 7){
-                    sliderPos[3]++;
-                    sliderMove.play();
-                }
-            }
-                
-        },this);
-
-        bttn.on('pointerdown', function (pointer, gameObject) {
-            soundBttn.play();
-            if (slidersWin && switchesWin){
-                imgFin.setDepth(99);
-                imgFin.visible = true;
-                soundTrain.play();
-            }
-        },this);
-
-    }
-
-    function onBlink ()
-    {
-        var childrenLight = groupLightsControl.getChildren();
-        if (lampNum == 2){
-            childrenLight[4].visible = true;
-        }
-        if (lampNum == 1){
-            if (sliderMainInstalled && sliderControlInstalled){
-                var k = 0;
-                for (var i = 0; i < 4; i++){
-                    if (sliderPos[i] == sliderPosWin[i]) k++;
-                }
-                if (k == 4) {
-                    childrenLight[2].visible = true;
-                    childrenLight[3].visible = false;
-                } else {
-                    childrenLight[2].visible = false;
-                    childrenLight[3].visible = true;
-                }
-            }
-            
-        }
-        
-        lampNum--;
-    }
-
-
+ 
         function updateMainScene0()
         { 
             var pointer = this.input.activePointer;
