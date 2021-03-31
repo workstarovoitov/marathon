@@ -22,7 +22,47 @@
         preload: function ()
         {
  
+            this.load.image('imgHeadbandMain0', 'assets/sprites/headbandMain0.png');
+            this.load.image('imgHeadbandMain2', 'assets/sprites/headbandMain2.png');
+            this.load.image('imgHeadbandScene7', 'assets/sprites/headbandScene7.png');
+            this.load.image('imgDeskOpened', 'assets/sprites/shelf.png');
+            this.load.image('imgBook', 'assets/sprites/book.png');
+            this.load.image('imgClock', 'assets/sprites/clock.png');
+            this.load.image('imgTracker', 'assets/sprites/tracker.png');
 
+            this.load.image('imgM1', 'assets/sprites/calendar/m1.png');
+            this.load.image('imgM2', 'assets/sprites/calendar/m2.png');
+            this.load.image('imgM3', 'assets/sprites/calendar/m3.png');
+            this.load.image('imgM4', 'assets/sprites/calendar/m4.png');
+            this.load.image('imgM5', 'assets/sprites/calendar/m5.png');
+            this.load.image('imgM6', 'assets/sprites/calendar/m6.png');
+            this.load.image('imgM7', 'assets/sprites/calendar/m7.png');
+            this.load.image('imgM8', 'assets/sprites/calendar/m8.png');
+            this.load.image('imgM9', 'assets/sprites/calendar/m9.png');
+            this.load.image('imgM10', 'assets/sprites/calendar/m10.png');
+            this.load.image('imgM11', 'assets/sprites/calendar/m11.png');
+            this.load.image('imgM12', 'assets/sprites/calendar/m12.png');
+            this.load.image('imgD0', 'assets/sprites/calendar/0.png');
+            this.load.image('imgD1', 'assets/sprites/calendar/1.png');
+            this.load.image('imgD2', 'assets/sprites/calendar/2.png');
+            this.load.image('imgD3', 'assets/sprites/calendar/3.png');
+            this.load.image('imgD4', 'assets/sprites/calendar/4.png');
+            this.load.image('imgD5', 'assets/sprites/calendar/5.png');
+            this.load.image('imgD6', 'assets/sprites/calendar/6.png');
+            this.load.image('imgD7', 'assets/sprites/calendar/7.png');
+            this.load.image('imgD8', 'assets/sprites/calendar/8.png');
+            this.load.image('imgD9', 'assets/sprites/calendar/9.png');
+
+            this.load.image('imgBoardScene5', 'assets/sprites/boardScene5.png');
+            this.load.image('imgWardrobeScene5', 'assets/sprites/wardrobeScene5.png');
+            this.load.image('imgWardrobeSceneMain2', 'assets/sprites/wardrobeSceneMain2.png');
+            this.load.image('imgShirtScene5', 'assets/sprites/shirtScene5.png');
+            this.load.image('imgShoesRScene5', 'assets/sprites/shoesRScene5.png');
+            this.load.image('imgShoesWScene5', 'assets/sprites/shoesWScene5.png');
+            this.load.image('imgPoloGScene5', 'assets/sprites/poloGScene5.png');
+            this.load.image('imgPoloRScene5', 'assets/sprites/poloRScene5.png');
+            this.load.image('imgPoloBScene5', 'assets/sprites/poloBScene5.png');
+            this.load.image('imgHatScene5', 'assets/sprites/hatScene5.png');
             
             this.load.image('imgReady', 'assets/sprites/ready.png');
             this.load.image('imgSteady', 'assets/sprites/steady.png');
@@ -30,12 +70,21 @@
             this.load.image('imgFaster', 'assets/sprites/faster.png');
             this.load.image('imgGood', 'assets/sprites/good.png');
             this.load.image('imgStep', 'assets/sprites/run3.png');
+
+            this.load.image('imgFlag', 'assets/sprites/flagScene8.png');
+            this.load.image('imgFlag2', 'assets/sprites/flagMainScene2.png');
+            this.load.image('imgTrack1', 'assets/sprites/track1.png');
+           
+
+            this.load.image('imgPantsSceneMain2', 'assets/sprites/pantsSceneMain2.png');
+            this.load.image('imgPantsScene9', 'assets/sprites/pantsScene9.png');
    
             this.load.audio('mp3stepL', 'assets/sound/stepL.mp3');
             this.load.audio('mp3stepR', 'assets/sound/stepR.mp3');
             this.load.audio('mp3breath', 'assets/sound/breath.mp3');
             this.load.audio('mp3fanfair', 'assets/sound/fanfair.mp3');
 
+            this.load.audio('mp3bag', 'assets/sound/bag.mp3');
             this.load.audio('mp3drawerClose', 'assets/sound/drawerClose.mp3');
             this.load.audio('mp3drawerOpen', 'assets/sound/drawerOpen.mp3');
             this.load.audio('mp3Bttn', 'assets/sound/bttn.mp3');
@@ -68,7 +117,6 @@
             this.load.image('imgMainSceneRight', 'assets/background/sceneMain2.jpg');
             this.load.image('imgBoard', 'assets/background/scene1.jpg');
             this.load.image('imgDeskClosed', 'assets/background/scene2.1.jpg');
-            this.load.image('imgDeskOpened', 'assets/background/scene2.2.jpg');
             this.load.image('imgLaptop', 'assets/background/scene3.jpg');
             this.load.image('imgShelf', 'assets/background/scene4.jpg');
             this.load.image('imgWardrobe', 'assets/background/scene5.jpg');
@@ -315,17 +363,35 @@
             scene: [Preloader, LaptopScene, DeskScene, ShelfScene, BoardScene, MapScene, BedScene, TreadmillScene, SportsbagScene, WardrobeScene, MainSceneR, MainSceneL, MainScene0, StartScene],
             audio: { disableWebAudio: true }
         };
-  
+
+        var g_month = 0;
+        var g_dayH = 2;
+        var g_dayL = 9;
+        var FlagsScene8XY_win = [[475, 330], [294, 425], [288, 377], [258, 482]];
+        var FlagsScene8XY = [[475, 400], [294, 425], [288, 377], [258, 482]];
+
         var ambient;    
         var cick;    
         var ambientOn = false;    
         var shelfWin = true;    
         var sportsbagOpen = true;    
         var wardrobeOpen = false;    
-        var headBandPacked = false;    
+        var shelfOpen = false;    
         var treadmillRun = false;
         var timerTreadmill;
 
+        var headbandPacked = false;
+        var hatPacked = false;
+        var shoesRPacked = false;
+        var shoesWPacked = false;
+        var poloGPacked = false;
+        var poloRPacked = false;
+        var poloBPacked = false;
+        var shirtPacked = false;
+        var clockPacked = false;
+        var armbandPacked = false;
+        var trackerPacked = false;
+        var pantsPacked = false;
 
         var game = new Phaser.Game(config);
 
@@ -381,7 +447,8 @@
         function createMainScene0()
         {
 
-            var imgScene = this.add.image(0, 0, 'imgWakeUp').setOrigin(0);
+            this.add.image(0, 0, 'imgWakeUp').setOrigin(0).setScale(1);
+
             this.cameras.main.fadeIn(6000);
 
             var fxCock = this.sound.add('mp3cock');
@@ -391,7 +458,16 @@
             var sprite_mainRight = this.add.sprite(0, 0); 
             var sprite_wardrobe = this.add.sprite(0, 0); 
             var sprite_soundBox = this.add.sprite(0, 0);
-       
+            var sprite_headBand = this.add.sprite(1255, 603, 'imgHeadbandMain0').setOrigin().setScale(1);
+     
+            if (headbandPacked) {
+                sprite_headBand.visible = false;
+                sprite_headBand.disableInteractive();
+            } else {
+                sprite_headBand.visible = true;
+                sprite_headBand.setInteractive();
+            }
+
             var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0,          500, 0,     500, 850,       0, 850]);
             var plgn_mainRight = new Phaser.Geom.Polygon([1100, 0,      1920, 0,    1920, 850,      1100, 850]);
             var plgn_wardrobe = new Phaser.Geom.Polygon([550, 0,        1050, 0,    1050, 900,       550, 900]);
@@ -418,10 +494,16 @@
             sprite_wardrobe.setInteractive(plgn_wardrobe, Phaser.Geom.Polygon.Contains);
             sprite_soundBox.setInteractive(plgn_soundBox, Phaser.Geom.Polygon.Contains);
 
-            if (!headBandPacked) {
-                var sprite_headBand = this.add.sprite(1460, 910, 'imgPinUnconnected').setOrigin().setScale(1).setInteractive();
-                this.input.setDraggable(sprite_headBand);
-            }
+
+            sprite_headBand.on('pointerdown', function (pointer, gameObject) {
+
+                sprite_headBand.disableInteractive();
+                sprite_headBand.visible = false;
+                headbandPacked = true;
+                hatPacked = false;
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+            }, this);
 
             sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
 
@@ -431,7 +513,7 @@
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
 
-                this.scene.switch('MainSceneR');
+                this.scene.start('MainSceneR');
 
            },this);
 
@@ -445,11 +527,7 @@
                 playAmbient();
             }, this);
 
-            sprite_headBand.on('pointerdown', function (pointer, gameObject) {
-                headBandPacked = true;
-                sprite_headBand.visible = false;
-            },this);
-
+  
     }
  
         function createMainSceneL()
@@ -508,7 +586,7 @@
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
 
-                this.scene.switch('MainSceneR');
+                this.scene.start('MainSceneR');
 
             }, this);
 
@@ -552,7 +630,9 @@
         function createMainSceneR()
         {
 
-            var imgScene = this.add.image(0, 0, 'imgMainSceneRight').setOrigin(0);
+            this.add.image(0, 0, 'imgMainSceneRight').setOrigin(0);
+            this.add.image(385, 0, 'imgWardrobeSceneMain2').setOrigin(0).setScale(1);
+            this.add.image(1500, 300, 'imgFlag2').setOrigin(0).setScale(0.33);
 
             var sprite_treadmill = this.add.sprite(0, 0); 
             var sprite_wardrobe = this.add.sprite(0, 0); 
@@ -562,7 +642,25 @@
             var sprite_books = this.add.sprite(0, 0); 
             var sprite_bed = this.add.sprite(0, 0); 
             var sprite_map = this.add.sprite(0, 0); 
-        
+            var sprite_headBand = this.add.sprite(1002, 578, 'imgHeadbandMain2').setOrigin().setScale(1);
+            var sprite_pants = this.add.sprite(1580, 860, 'imgPantsSceneMain2').setOrigin(0).setInteractive();
+
+            if (headbandPacked) {
+                sprite_headBand.visible = false;
+                sprite_headBand.disableInteractive();
+            } else {
+                sprite_headBand.visible = true;
+                sprite_headBand.setInteractive();
+            }
+
+            if (pantsPacked) {
+                sprite_pants.visible = false;
+                sprite_pants.disableInteractive();
+            } else {
+                sprite_pants.visible = true;
+                sprite_pants.setInteractive();
+            }
+
             var plgn_treadmill = new Phaser.Geom.Polygon([700, 0, 1100, 0, 1100, 1080, 700, 1080]);
             var plgn_wardrobe = new Phaser.Geom.Polygon([0, 0, 500, 0, 500, 1080, 0, 1080]);
             var plgn_mainLeft = new Phaser.Geom.Polygon([0, 530, 230, 530, 230, 930, 1400, 930, 1400, 1080, 0, 1080]);
@@ -634,14 +732,13 @@
             }, this);
 
             sprite_books.on('pointerdown', function (pointer, gameObject) {
-
-                this.scene.switch('BooksSceneR');
-
+               
+                
             }, this);
 
             sprite_bed.on('pointerdown', function (pointer, gameObject) {
 
-                this.scene.switch('BedScene');
+                this.scene.start('BedScene');
 
             }, this);
 
@@ -651,28 +748,61 @@
 
             }, this);
 
+            sprite_headBand.on('pointerdown', function (pointer, gameObject) {
 
-            // sprite_headBand.on('pointerdown', function (pointer, gameObject) {
-           //     headBandPacked = true;
-           //     sprite_headBand.visible = false;
-           // },this);
+                sprite_headBand.disableInteractive();
+                sprite_headBand.visible = false;
+                headbandPacked = true;
+                hatPacked = false;
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();
+            }, this);
+
+            sprite_pants.on('pointerdown', function (pointer, gameObject) {
+
+                sprite_pants.disableInteractive();
+                sprite_pants.visible = false;
+                pantsPacked = true;
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();
+
+            }, this);
 
     }
 
         function createWardrobeScene()
         {
 
-            var imgScene = this.add.image(0, 0, 'imgWardrobe').setOrigin(0);
+            this.add.image(0, 0, 'imgWardrobe').setOrigin(0);
+            this.add.image(150, 380, 'imgBoardScene5').setOrigin(0);
 
             var sprite_mainLeft = this.add.sprite(0, 0);
             var sprite_mainRight = this.add.sprite(0, 0);
             var sprite_wardrobe = this.add.sprite(0, 0);
             var sprite_books = this.add.sprite(0, 0);
 
+            var sprite_hat = this.add.sprite(1142, 343, 'imgHatScene5').setOrigin().setScale(1).setInteractive();
+            var sprite_shoesR = this.add.sprite(1000, 900, 'imgShoesRScene5').setOrigin().setScale(1).setInteractive();
+            var sprite_shoesW = this.add.sprite(1152, 910, 'imgShoesWScene5').setOrigin().setScale(1).setInteractive();
+            var sprite_poloB = this.add.sprite(1200, 660, 'imgPoloBScene5').setOrigin().setScale(1).setInteractive();
+            var sprite_poloR = this.add.sprite(1144, 658, 'imgPoloRScene5').setOrigin().setScale(1).setInteractive();
+            var sprite_poloG = this.add.sprite(1103, 655, 'imgPoloGScene5').setOrigin().setScale(1).setInteractive();
+            var sprite_shirt = this.add.sprite(1011, 641, 'imgShirtScene5').setOrigin().setScale(1).setInteractive();
+
+            sprite_hat.visible = false;
+            sprite_shoesR.visible = false;
+            sprite_shoesW.visible = false;
+            sprite_poloG.visible = false;
+            sprite_poloB.visible = false;
+            sprite_poloR.visible = false;
+            sprite_shirt.visible = false;
+            
+            var sprite_wardrobeDoor = this.add.sprite(1070, 540, 'imgWardrobeScene5').setOrigin().setScale(1).setInteractive();
+
             var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0, 500, 0, 500, 1080, 0, 1080]);
             var plgn_mainRight = new Phaser.Geom.Polygon([1350, 0, 1920, 0, 1920, 1080, 1350, 1080]);
             var plgn_wardrobe = new Phaser.Geom.Polygon([500, 0, 1350, 0, 1350, 1080, 500, 1080]);
-            var plgn_books = new Phaser.Geom.Polygon([360, 100, 520, 100, 520, 260, 360, 260]);
+            var plgn_books = new Phaser.Geom.Polygon([300, 100, 520, 100, 520, 320, 300, 320]);
 
             //var graphics = this.add.graphics();
             //graphics.fillStyle(0xffaa00);
@@ -696,32 +826,255 @@
             sprite_books.setInteractive(plgn_books, Phaser.Geom.Polygon.Contains);
 
             sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
-
-                this.scene.switch('MainSceneL');
-
-            }, this);
-            
-           sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
-
-                this.scene.switch('MainSceneR');
+                if (wardrobeOpen) {
+                    fxWardrobe = this.sound.add('mp3wClose');
+                    fxWardrobe.play();
+                    wardrobeOpen = false;
+                }
+                this.scene.start('MainSceneL');
 
             }, this);
             
-           
+            sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
+                if (wardrobeOpen) {
+                    fxWardrobe = this.sound.add('mp3wClose');
+                    fxWardrobe.play();
+                    wardrobeOpen = false;
+                }
+                this.scene.start('MainSceneR');
+
+            }, this);
 
             sprite_wardrobe.on('pointerdown', function (pointer, gameObject) {
 
+                var fxWardrobe;
                 if (wardrobeOpen) {
-                    var fxWardrobe = this.sound.add('mp3wClose');
+                    fxWardrobe = this.sound.add('mp3wClose');
+                   
+                    sprite_wardrobeDoor.visible = true;
+                    sprite_wardrobeDoor.setInteractive();
                 } else {
-                    var fxWardrobe = this.sound.add('mp3wOpen');
+                    fxWardrobe = this.sound.add('mp3wOpen');
+                    if (!hatPacked) {
+                        sprite_hat.visible = true;
+                        sprite_hat.setInteractive();
+                    }
+                    if (!shoesRPacked) {
+                        sprite_shoesR.visible = true;
+                        sprite_shoesR.setInteractive();
+                    }
+                    if (!shoesWPacked) {
+                        sprite_shoesW.visible = true;
+                        sprite_shoesW.setInteractive();
+                    }
+                    if (!poloGPacked) {
+                        sprite_poloG.visible = true;
+                        sprite_poloG.setInteractive();
+                    }
+                    if (!poloBPacked) {
+                        sprite_poloB.visible = true;
+                        sprite_poloB.setInteractive();
+                    }
+                    if (!poloRPacked) {
+                        sprite_poloR.visible = true;
+                        sprite_poloR.setInteractive();
+                    }
+                    if (!shirtPacked) {
+                        sprite_shirt.visible = true;
+                        sprite_shirt.setInteractive();
+                    }                   
+                    
+                    sprite_wardrobeDoor.visible = false;
+                    sprite_wardrobeDoor.disableInteractive();
                 }
-               
+
                 fxWardrobe.play();
                 wardrobeOpen = !wardrobeOpen;
 
             }, this);
+  
+            sprite_wardrobeDoor.on('pointerdown', function (pointer, gameObject) {
 
+                var fxWardrobe;
+                if (wardrobeOpen) {
+                    fxWardrobe = this.sound.add('mp3wClose');
+                   
+                    sprite_wardrobeDoor.visible = true;
+                    sprite_wardrobeDoor.setInteractive();
+                } else {
+                    fxWardrobe = this.sound.add('mp3wOpen');
+                    if (!hatPacked) {
+                        sprite_hat.visible = true;
+                        sprite_hat.setInteractive();
+                    }
+                    if (!shoesRPacked) {
+                        sprite_shoesR.visible = true;
+                        sprite_shoesR.setInteractive();
+                    }
+                    if (!shoesWPacked) {
+                        sprite_shoesW.visible = true;
+                        sprite_shoesW.setInteractive();
+                    }
+                    if (!poloGPacked) {
+                        sprite_poloG.visible = true;
+                        sprite_poloG.setInteractive();
+                    }
+                    if (!poloBPacked) {
+                        sprite_poloB.visible = true;
+                        sprite_poloB.setInteractive();
+                    }
+                    if (!poloRPacked) {
+                        sprite_poloR.visible = true;
+                        sprite_poloR.setInteractive();
+                    }
+                    if (!shirtPacked) {
+                        sprite_shirt.visible = true;
+                        sprite_shirt.setInteractive();
+                    }                   
+                    
+                    sprite_wardrobeDoor.visible = false;
+                    sprite_wardrobeDoor.disableInteractive();
+                }
+
+                fxWardrobe.play();
+                wardrobeOpen = !wardrobeOpen;
+
+            }, this);
+  
+
+            sprite_hat.on('pointerdown', function (pointer, gameObject) {
+
+                hatPacked = true;
+                headbandPacked = false;
+                sprite_hat.visible = false;
+                sprite_hat.disableInteractive();
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+
+            sprite_shoesR.on('pointerdown', function (pointer, gameObject) {
+
+                shoesRPacked = true;
+                sprite_shoesR.visible = false;
+                sprite_shoesR.disableInteractive();
+
+                shoesWPacked = false;
+                sprite_shoesW.visible = true;
+                sprite_shoesW.setInteractive();
+
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+
+            sprite_shoesW.on('pointerdown', function (pointer, gameObject) {
+
+                shoesWPacked = true;
+                sprite_shoesW.visible = false;
+                sprite_shoesW.disableInteractive();
+
+                shoesRPacked = false;
+                sprite_shoesR.visible = true;
+                sprite_shoesR.setInteractive();
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+
+            sprite_poloG.on('pointerdown', function (pointer, gameObject) {
+
+                poloGPacked = true;
+                sprite_poloG.visible = false;
+                sprite_poloG.disableInteractive();
+
+                poloRPacked = false;
+                sprite_poloR.visible = true;
+                sprite_poloR.setInteractive();
+
+                poloBPacked = false;
+                sprite_poloB.visible = true;
+                sprite_poloB.setInteractive();
+
+                shirtPacked = false;
+                sprite_shirt.visible = true;
+                sprite_shirt.setInteractive();
+
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+
+            sprite_poloR.on('pointerdown', function (pointer, gameObject) {
+
+                poloRPacked = true;
+                sprite_poloR.visible = false;
+                sprite_poloR.disableInteractive();
+
+                poloGPacked = false;
+                sprite_poloG.visible = true;
+                sprite_poloG.setInteractive();
+
+                poloBPacked = false;
+                sprite_poloB.visible = true;
+                sprite_poloB.setInteractive();
+
+                shirtPacked = false;
+                sprite_shirt.visible = true;
+                sprite_shirt.setInteractive();
+
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+
+            sprite_poloB.on('pointerdown', function (pointer, gameObject) {
+
+                poloBPacked = true;
+                sprite_poloB.visible = false;
+                sprite_poloB.disableInteractive();
+
+                poloGPacked = false;
+                sprite_poloG.visible = true;
+                sprite_poloG.setInteractive();
+
+                poloRPacked = false;
+                sprite_poloR.visible = true;
+                sprite_poloR.setInteractive();
+
+                shirtPacked = false;
+                sprite_shirt.visible = true;
+                sprite_shirt.setInteractive();
+
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+
+            sprite_shirt.on('pointerdown', function (pointer, gameObject) {
+
+                shirtPacked = true;
+                sprite_shirt.visible = false;
+                sprite_shirt.disableInteractive();
+
+                poloGPacked = false;
+                sprite_poloG.visible = true;
+                sprite_poloG.setInteractive();
+
+                poloRPacked = false;
+                sprite_poloR.visible = true;
+                sprite_poloR.setInteractive();
+
+                poloBPacked = false;
+                sprite_poloB.visible = true;
+                sprite_poloB.setInteractive();
+
+
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
+          
             sprite_books.on('pointerdown', function (pointer, gameObject) {
                 this.scene.switch('BooksSceneL');
             }, this);
@@ -754,7 +1107,7 @@
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
 
-                this.scene.switch('MainSceneR');
+                this.scene.start('MainSceneR');
 
             }, this);
             
@@ -805,8 +1158,20 @@
             var sprite_mainRight = this.add.sprite(0, 0); 
             var sprite_treadmill = this.add.sprite(0, 0);
             var sprite_treadmillStart = this.add.sprite(0, 0); 
-            var step = this.add.sprite(850, 950, 'imgStep').setOrigin().setScale(0.225);
+            var step = this.add.sprite(848, 955, 'imgStep').setOrigin().setScale(0.225);
             step.visible = false;
+
+            var sprite_headBand = this.add.sprite(1115, 940, 'imgHeadbandScene7').setOrigin().setScale(1);
+
+            if (headbandPacked) {
+                sprite_headBand.visible = false;
+                sprite_headBand.disableInteractive();
+            } else {
+                sprite_headBand.visible = true;
+                sprite_headBand.setInteractive();
+            }
+
+
             var plgn_mainRight = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
             var plgn_treadmillStart = new Phaser.Geom.Polygon([          630, 620,       1020, 620,       1020, 810,       630, 810]);
             var plgn_treadmill = new Phaser.Geom.Polygon([            450, 0,         1280, 0,        1280, 1080,      450, 1080]);
@@ -831,7 +1196,7 @@
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
 
-                this.scene.switch('MainSceneR');
+                this.scene.start('MainSceneR');
                
             }, this);
 
@@ -846,6 +1211,16 @@
                 }
                 stepL = !stepL;
 
+            }, this);
+
+            sprite_headBand.on('pointerdown', function (pointer, gameObject) {
+
+                sprite_headBand.disableInteractive();
+                sprite_headBand.visible = false;
+                headbandPacked = true;
+                hatPacked = false;
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();
             }, this);
 
             sprite_treadmillStart.on('pointerdown', function (pointer, gameObject) {
@@ -996,13 +1371,22 @@
         function createBedScene()
         {
 
-            var imgScene = this.add.image(0, 0, 'imgBed').setOrigin(0);
+            imgScene = this.add.image(0, 0, 'imgBed').setOrigin(0);
 
             var sprite_mainRight = this.add.sprite(0, 0); 
             var sprite_bed = this.add.sprite(0, 0);
             var sprite_soundBox = this.add.sprite(0, 0);
             var sprite_books = this.add.sprite(0, 0); 
             var sprite_map = this.add.sprite(0, 0);
+            var sprite_pants = this.add.sprite(1400, 740, 'imgPantsScene9').setOrigin(0).setInteractive();
+
+            if (pantsPacked) {
+                sprite_pants.visible = false;
+                sprite_pants.disableInteractive();
+            } else {
+                sprite_pants.visible = true;
+                sprite_pants.setInteractive();
+            }
 
             var plgn_mainRight = new Phaser.Geom.Polygon([      0, 800,       720, 700,       1000, 1080,         0, 1080]);
             var plgn_bed = new Phaser.Geom.Polygon([            700, 320,       1300, 320,      1300, 470,      700, 550]);
@@ -1034,10 +1418,19 @@
             sprite_books.setInteractive(plgn_books, Phaser.Geom.Polygon.Contains);
             sprite_map.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
 
+            sprite_pants.on('pointerdown', function (pointer, gameObject) {
+
+                sprite_pants.disableInteractive();
+                sprite_pants.visible = false;
+                pantsPacked = true;
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();         
+
+            }, this);
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
 
-                this.scene.switch('MainSceneR');
+                this.scene.start('MainSceneR');
 
             }, this);
             
@@ -1080,14 +1473,36 @@
         function createMapScene()
         {
 
-            var imgScene = this.add.image(0, 0, 'imgMap').setOrigin(0);
+            imgScene = this.add.image(0, 0, 'imgMap').setOrigin(0).setScale(1);
+            this.add.image(466, 265, 'imgTrack1').setOrigin(0).setScale(1);
+            //this.add.image(725, 472, 'imgTrack3').setOrigin(0).setScale(1);
 
             var sprite_mainRight = this.add.sprite(0, 0); 
             var sprite_map = this.add.sprite(0, 0); 
-         
+            var zoneMap = this.add.zone(0, 0).setOrigin(0);
+            var zoneSlider4 = this.add.zone(0, 0).setOrigin(0);
+            zoneMap.setName('zMap');
+            zoneSlider4.setName('zSlider4');
+
+
+
+            var sprite_flag1 = this.add.sprite(475, 330, 'imgFlag').setOrigin(0).setScale(0.075).setInteractive();
+            var sprite_flag2 = this.add.sprite(828, 250, 'imgFlag').setOrigin(0).setScale(0.075).setInteractive();
+            var sprite_flag3 = this.add.sprite(988, 335, 'imgFlag').setOrigin(0).setScale(0.075).setInteractive();
+            var sprite_flag4 = this.add.sprite(560, 880, 'imgFlag').setOrigin(0).setScale(0.075).setInteractive();
+          
+            this.input.setDraggable(sprite_flag1);
+            this.input.setDraggable(sprite_flag2);
+            this.input.setDraggable(sprite_flag3);
+            this.input.setDraggable(sprite_flag4);
+          
+
+            
+
             var plgn_mainRight = new Phaser.Geom.Polygon([      0, 0,       1920, 0,       1920, 1080,         0, 1080]);
             var plgn_map = new Phaser.Geom.Polygon([      180, 0,       1400, 120,       1400, 920,         180, 1080]);
-           
+
+
             //var graphics = this.add.graphics();
             //graphics.fillStyle(0xffaa00);
             //graphics.fillPoints(plgn_map.points, true);
@@ -1100,12 +1515,29 @@
 
             sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
             sprite_map.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
-       
+
+
+            zoneMap.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
+           // zoneSlider4.setInteractive(plgnSlider4, Phaser.Geom.Polygon.Contains);
+            zoneMap.input.dropZone = true;
+            //zoneSlider4.input.dropZone = true;
+
+           
+
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
-                this.scene.switch('MainSceneR');
+                this.scene.start('MainSceneR');
             }, this);
             
+            this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
 
+                if (dragX > 200 && dragX < 1400) {
+                    gameObject.x = dragX;
+                }
+                
+                gameObject.y = dragY;
+
+                gameObject.setScale(0.075 - (3.63/190000) * gameObject.x);
+            });
         }
 
         function createBoardScene() {
@@ -1200,24 +1632,80 @@
 
         function createDeskScene() {
 
-            var imgSceneClosed = this.add.image(0, 0, 'imgDeskClosed').setOrigin(0);
-            var imgSceneOpened = this.add.image(0, 0, 'imgDeskOpened').setOrigin(0);
+            imgSceneClosed = this.add.image(0, 0, 'imgDeskClosed').setOrigin(0);
+           
+            var groupMonth = this.add.group();
+            for (var i = 1; i <= 12; i++) {
+                groupMonth.create(784, 309, 'imgM' + i).setOrigin(0);
+            }
+            var childMonth = groupMonth.getChildren();
+            for (var i = 0; i < 12; i++) {
+                childMonth[i].visible = false;
+            }
+            childMonth[g_month].visible = true;
+
+            var groupDayH = this.add.group();
+            for (var i = 0; i <= 3; i++) {
+                groupDayH.create(823, 318, 'imgD' + i).setOrigin(0);
+            }
+            var childDayH = groupDayH.getChildren();
+            for (var i = 0; i < 4; i++) {
+                childDayH[i].visible = false;
+            }
+
+            childDayH[g_dayH].visible = true;
+
+            var groupDayL = this.add.group();
+            for (var i = 0; i <= 9; i++) {
+                groupDayL.create(861, 326, 'imgD' + i).setOrigin(0);
+            }
+            var childDayL = groupDayL.getChildren();
+            for (var i = 0; i < 10; i++) {
+                childDayL[i].visible = false;
+            }
+            childDayL[g_dayL].visible = true;
+
+
+
+            var imgSceneOpened = this.add.image(101, 700, 'imgDeskOpened').setOrigin(0);
             imgSceneOpened.visible = false;
-
-
+           
             var sprite_mainLeft = this.add.sprite(0, 0);
             var sprite_board = this.add.sprite(0, 0);
             var sprite_shelf = this.add.sprite(0, 0);
             var sprite_laptop = this.add.sprite(0, 0);
+
+            var sprite_month = this.add.sprite(0, 0);
+            var sprite_dayH = this.add.sprite(0, 0);
+            var sprite_dayL = this.add.sprite(0, 0);
+
+            var sprite_book = this.add.sprite(520, 715, 'imgBook').setOrigin(0).setScale(1.2);
+            var sprite_clock = this.add.sprite(450, 745, 'imgClock').setOrigin(0);
+            var sprite_tracker = this.add.sprite(325, 810, 'imgTracker').setOrigin(0);
+            sprite_book.visible = false;
+            sprite_clock.visible = false;
+            sprite_tracker.visible = false;
+
 
             var plgn_mainLeft = new Phaser.Geom.Polygon([830, 710, 1920, 670, 1920, 1080, 830, 1080]);
             var plgn_board = new Phaser.Geom.Polygon([250, 0, 1920, 0, 1920, 100, 250, 120]);
             var plgn_shelf = new Phaser.Geom.Polygon([100, 730, 770, 700, 770, 1080, 100, 1080]);
             var plgn_laptop = new Phaser.Geom.Polygon([860, 210, 1200, 130, 1360, 490, 1020, 600]);
 
+            var plgn_month = new Phaser.Geom.Polygon([770, 285, 815, 295, 815, 350, 770, 340]);
+            var plgn_dayH = new Phaser.Geom.Polygon([815, 295, 860, 305, 860, 360, 815, 350]);
+            var plgn_dayL = new Phaser.Geom.Polygon([860, 305, 905, 315, 905, 370, 860, 360]);
+
             //var graphics = this.add.graphics();
             //graphics.fillStyle(0xffaa00);
-            //graphics.fillPoints(plgn_board.points, true);
+            //graphics.fillPoints(plgn_month.points, true);
+
+           
+            //graphics.fillStyle(0xffaaff);
+            //graphics.fillPoints(plgn_dayH.points, true);
+
+            //graphics.fillStyle(0xaaaa00);
+            //graphics.fillPoints(plgn_dayL.points, true);
 
             text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
 
@@ -1230,6 +1718,10 @@
             sprite_shelf.setInteractive(plgn_shelf, Phaser.Geom.Polygon.Contains);
             sprite_laptop.setInteractive(plgn_laptop, Phaser.Geom.Polygon.Contains);
 
+            sprite_month.setInteractive(plgn_month, Phaser.Geom.Polygon.Contains);
+            sprite_dayH.setInteractive(plgn_dayH, Phaser.Geom.Polygon.Contains);
+            sprite_dayL.setInteractive(plgn_dayL, Phaser.Geom.Polygon.Contains);
+
             sprite_mainLeft.on('pointerdown', function (pointer, gameObject) {
                 this.scene.switch('MainSceneL');
             }, this);
@@ -1240,31 +1732,118 @@
 
             sprite_shelf.on('pointerdown', function (pointer, gameObject) {
 
-                if (!shelfWin) {
-                    this.scene.switch('ShelfeScene');
+                
+                if (shelfOpen) {
+                    this.sound.play('mp3drawerClose');
+
+                    imgSceneOpened.visible = false;
+                    sprite_tracker.visible = false;
+                    sprite_clock.visible = false;
+                    sprite_book.visible = false;
+
+                    sprite_book.disableInteractive();
+                    sprite_clock.disableInteractive();
+                    sprite_tracker.disableInteractive();
+
+
                 } else {
-                    if (!imgSceneOpened.visible) {
-                        this.sound.play('mp3drawerOpen');
-                        imgSceneClosed.visible = false;
-                        imgSceneOpened.visible = true;
-                    } else {
-                        this.sound.play('mp3drawerClose');
-                        imgSceneClosed.visible = true;
-                        imgSceneOpened.visible = false;
+
+                    this.sound.play('mp3drawerOpen');
+
+                    if (!clockPacked) {
+                        sprite_clock.visible = true;
+                        sprite_clock.setInteractive();
                     }
-                   
+                    if (!trackerPacked) {
+                        sprite_tracker.visible = true;
+                        sprite_tracker.setInteractive();
+                    }
+
+                    sprite_book.visible = true;
+                    sprite_book.setInteractive();
+
+
+                    imgSceneOpened.visible = true;
                     
                 }
 
-               
-           
-                
+                shelfOpen = !shelfOpen;
 
             }, this);
+
             sprite_laptop.on('pointerdown', function (pointer, gameObject) {
                 this.scene.switch('LaptopScene');
             }, this);
 
+            sprite_book.on('pointerdown', function (pointer, gameObject) {
+
+
+            }, this);
+
+            sprite_clock.on('pointerdown', function (pointer, gameObject) {
+
+                sprite_clock.disableInteractive();
+                sprite_clock.visible = false;
+                clockPacked = true;
+                armbandPacked = false;
+                trackerPacked = false;
+                sprite_tracker.visible = true;
+                sprite_tracker.setInteractive();
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();
+            }, this);
+
+            sprite_tracker.on('pointerdown', function (pointer, gameObject) {
+
+                sprite_tracker.disableInteractive();
+                sprite_tracker.visible = false;
+                trackerPacked = true;
+                armbandPacked = false;
+                clockPacked = false;
+                sprite_clock.visible = true;
+                sprite_clock.setInteractive();
+                fxBag = this.sound.add('mp3bag');
+                fxBag.play();
+            }, this);
+
+            sprite_month.on('pointerdown', function (pointer, gameObject) {
+
+                g_month++;
+                if (g_month > 11) {
+                    g_month = 0;
+                }
+                for (var i = 0; i < 12; i++) {
+                    childMonth[i].visible = false;
+                }
+                childMonth[g_month].visible = true;
+
+            }, this);
+
+            sprite_dayH.on('pointerdown', function (pointer, gameObject) {
+
+                g_dayH++;
+                if (g_dayH > 3) {
+                    g_dayH = 0;
+                }
+                for (var i = 0; i < 4; i++) {
+                    childDayH[i].visible = false;
+                }
+                childDayH[g_dayH].visible = true;
+
+            }, this);
+
+            sprite_dayL.on('pointerdown', function (pointer, gameObject) {
+
+                g_dayL++;
+                if (g_dayL > 9) {
+                    g_dayL = 0;
+                }
+                for (var i = 0; i < 10; i++) {
+                    childDayL[i].visible = false;
+                }
+                childDayL[g_dayL].visible = true;
+
+            }, this);
 
         }
 
