@@ -21,7 +21,71 @@
 
         preload: function ()
         {
+
+
+
             this.load.image('imgStartBG', 'assets/background/start.jpg');
+
+            this.load.image('imgM_bg', 'assets/marathon/background.jpg');
+            this.load.image('imgM_mounts', 'assets/marathon/mounts.png');
+            this.load.image('imgM_forest', 'assets/marathon/forest.png');
+            this.load.image('imgM_sky1', 'assets/marathon/sky1.png');
+            this.load.image('imgM_sky2', 'assets/marathon/sky2.png');
+            this.load.image('imgM_front1', 'assets/marathon/front1.png');
+            this.load.image('imgM_front2', 'assets/marathon/front2.png');
+            this.load.image('imgM_grass', 'assets/marathon/grass.png');
+            this.load.image('imgM_grass0', 'assets/marathon/grass0.png');
+            this.load.image('imgM_road', 'assets/marathon/road.png');
+
+            for (var i = 1; i <= 8; i++) {
+                this.load.image('imgM_b' + i, 'assets/marathon/mid/b' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 8; i++) {
+                this.load.image('imgM_b' + i, 'assets/marathon/mid/b' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R0_' + i, 'assets/marathon/run0/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R1_' + i, 'assets/marathon/run1/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R2_' + i, 'assets/marathon/run2/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R3_' + i, 'assets/marathon/run3/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R4_' + i, 'assets/marathon/run4/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R5_' + i, 'assets/marathon/run5/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R6_' + i, 'assets/marathon/run6/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R7_' + i, 'assets/marathon/run7/' + i+ '.png');
+            }
+
+            for (var i = 1; i <= 6; i++) {
+                this.load.image('imgM_R8_' + i, 'assets/marathon/run8/' + i+ '.png');
+            }
+
+
+
+
+
+
 
             this.load.html('nameform', 'assets/text/nameform.html');
  
@@ -171,6 +235,7 @@
             this.load.audio('mp3drawerOpen', 'assets/sound/drawerOpen.mp3');
             this.load.audio('mp3Bttn', 'assets/sound/bttn.mp3');
             this.load.audio('mp3cock', 'assets/sound/cock.mp3');
+            this.load.audio('mp3shoot', 'assets/sound/shoot.mp3');
 
             this.load.audio('mp3Calendar', 'assets/sound/calendar.mp3');
             this.load.audio('mp3Sheet', 'assets/sound/sheet.mp3');
@@ -193,6 +258,7 @@
             this.load.audio('mp3ambient', 'assets/ambient/Ketsa.mp3');
             this.load.audio('mp3run', 'assets/ambient/run.mp3');
             this.load.audio('mp3treadmill', 'assets/ambient/treadmill.mp3');
+            this.load.audio('mp3marathon', 'assets/ambient/marathon.mp3');
             
             this.load.image('book1.0', 'assets/books/1.0.png');
             this.load.image('book1.1', 'assets/books/1.1.png');
@@ -463,8 +529,8 @@
             },
             //preload: preloadBedScene,
             create: createMarathonScene,
-            update: updateMarathonScene
-
+            update: updateMarathonScene,
+            
         });
 
         var config = {
@@ -487,10 +553,20 @@
             dom: {
                 createContainer: true
             },
-            scene: [Preloader, MarathonScene, LaptopScene, Laptop2Scene, Laptop3Scene, DeskScene, ShelfScene, BoardScene, MapScene, BedScene, TreadmillScene, SportsbagScene, WardrobeScene, MainSceneR, MainScene0, StartScene],
-            audio: { disableWebAudio: true }
+            scene: [Preloader, LaptopScene, Laptop2Scene, Laptop3Scene, DeskScene, ShelfScene, BoardScene, MapScene, BedScene, TreadmillScene, SportsbagScene, WardrobeScene, MainSceneR, MainScene0, StartScene, MarathonScene],
+            audio: { disableWebAudio: true },
+            physics: {
+                default: "arcade"
+            }
         };
 
+        var velocity = -100;
+        var velocityRunners = [];
+        var marathonRestarted = false;
+        var newBx, newBy;
+        var bNum = 0;
+        var buildingsWidth = [225, 450, 675, 675, 900, 1125, 1125, 1350];
+        //var buildingsWidth = [150, 300, 450, 450, 600, 750, 750, 900];
         var depth = 100;
         var tap = 0;
         var printerCount;
@@ -567,20 +643,7 @@
       
         var game = new Phaser.Game(config);
 
-        function createStartScene() {
-
-            imgStartScene = this.add.image(0, 0, 'imgStartBG').setOrigin(0);
-          
-            this.input.on('pointerdown', function (pointer, gameObject) {
-                //this.scene.switch('MainScene0');
-
-                this.cameras.main.fadeOut(1000);
-                timedEvent = this.time.addEvent({ delay: 1250, callback: () => { this.scene.start('MainScene0'); }, callbackScope: this, repeat: 0, startAt: 0 });
-
-            }, this);
-
-        }
-
+     
         function preloadMainScene0()
         {
 
@@ -607,7 +670,20 @@
         }
 
 
+        function createStartScene() {
 
+            imgStartScene = this.add.image(0, 0, 'imgStartBG').setOrigin(0);
+
+            this.input.on('pointerdown', function (pointer, gameObject) {
+                //this.scene.switch('MainScene0');
+
+                this.cameras.main.fadeOut(1000);
+                timedEvent = this.time.addEvent({ delay: 1250, callback: () => { this.scene.start('MainScene0'); }, callbackScope: this, repeat: 0, startAt: 0 });
+                //timedEvent = this.time.addEvent({ delay: 1250, callback: () => { this.scene.start('MarathonScene'); }, callbackScope: this, repeat: 0, startAt: 0 });
+
+            }, this);
+
+        }
 
         function createMainScene0()
         {
@@ -2093,7 +2169,7 @@
                 if (g_month == 2 && g_day == 25 && winBooks && winBag && winMap && winTreadmill && winFile && winOpponents) {
                     
                     timedEvent = this.time.addEvent({
-                        delay: 3250, callback: () => {
+                        delay: 4000, callback: () => {
 
                             this.scene.start('MarathonScene');
 
@@ -4137,10 +4213,185 @@
 
         function createMarathonScene() {
 
-            imgScene = this.add.image(0, 0, 'imgCongrats').setOrigin(0);
+            this.cameras.main.fadeIn(3000);
+            
+            this.add.image(0, 0, 'imgM_bg').setOrigin(0);
+            this.sound.play('mp3shoot');
+            timedEvent = this.time.addEvent({ delay: 500, callback: () => { this.sound.play('mp3marathon'); }, callbackScope: this, repeat: 0, startAt: 0 });
+            this.background_mounts = this.add.tileSprite(0, 430, 1980, 260, 'imgM_mounts').setOrigin(0);
+            this.background_forest = this.add.tileSprite(0, 500, 1980, 220, 'imgM_forest').setOrigin(0);
+            this.background_grass = this.add.tileSprite(0, 720, 1980, 30, 'imgM_grass0').setOrigin(0);
+            this.background_road = this.add.tileSprite(0, 750, 1980, 330, 'imgM_road').setOrigin(0);
+
+            this.buildingsGroup = this.add.group();
+            this.skiesGroup = this.add.group();
+            this.frontGroup = this.add.group();
+
+            platform = this.physics.add.sprite(-300, 372, "imgM_b1").setOrigin(0).setVelocityX(-100);
+            platform.displayWidth = 150;
+            this.nextBuildDistance = 300;
+            this.nextSkiesDistance = 0;
+            this.nextFrontDistance = 300;
+            this.buildingsGroup.add(platform);
+
+            text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
 
 
+            this.anims.create({
+                key: 'runner0',
+                frames: [
+                    { key: 'imgM_R0_1' },
+                    { key: 'imgM_R0_2' },
+                    { key: 'imgM_R0_3' },
+                    { key: 'imgM_R0_4' },
+                    { key: 'imgM_R0_5' },
+                    { key: 'imgM_R0_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner1',
+                frames: [
+                    { key: 'imgM_R1_1' },
+                    { key: 'imgM_R1_2' },
+                    { key: 'imgM_R1_3' },
+                    { key: 'imgM_R1_4' },
+                    { key: 'imgM_R1_5' },
+                    { key: 'imgM_R1_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner2',
+                frames: [
+                    { key: 'imgM_R2_1' },
+                    { key: 'imgM_R2_2' },
+                    { key: 'imgM_R2_3' },
+                    { key: 'imgM_R2_4' },
+                    { key: 'imgM_R2_5' },
+                    { key: 'imgM_R2_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner3',
+                frames: [
+                    { key: 'imgM_R3_1' },
+                    { key: 'imgM_R3_2' },
+                    { key: 'imgM_R3_3' },
+                    { key: 'imgM_R3_4' },
+                    { key: 'imgM_R3_5' },
+                    { key: 'imgM_R3_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner4',
+                frames: [
+                    { key: 'imgM_R4_1' },
+                    { key: 'imgM_R4_2' },
+                    { key: 'imgM_R4_3' },
+                    { key: 'imgM_R4_4' },
+                    { key: 'imgM_R4_5' },
+                    { key: 'imgM_R4_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner5',
+                frames: [
+                    { key: 'imgM_R5_1' },
+                    { key: 'imgM_R5_2' },
+                    { key: 'imgM_R5_3' },
+                    { key: 'imgM_R5_4' },
+                    { key: 'imgM_R5_5' },
+                    { key: 'imgM_R5_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner6',
+                frames: [
+                    { key: 'imgM_R6_1' },
+                    { key: 'imgM_R6_2' },
+                    { key: 'imgM_R6_3' },
+                    { key: 'imgM_R6_4' },
+                    { key: 'imgM_R6_5' },
+                    { key: 'imgM_R6_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner7',
+                frames: [
+                    { key: 'imgM_R7_1' },
+                    { key: 'imgM_R7_2' },
+                    { key: 'imgM_R7_3' },
+                    { key: 'imgM_R7_4' },
+                    { key: 'imgM_R7_5' },
+                    { key: 'imgM_R7_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.anims.create({
+                key: 'runner8',
+                frames: [
+                    { key: 'imgM_R8_1' },
+                    { key: 'imgM_R8_2' },
+                    { key: 'imgM_R8_3' },
+                    { key: 'imgM_R8_4' },
+                    { key: 'imgM_R8_5' },
+                    { key: 'imgM_R8_6' }
+                ],
+                frameRate: 5,
+                repeat: -1
+            });
+
+            this.runner0 = this.physics.add.sprite(800, 820, 'imgM_R1_1').setScale(0.9).setDepth(820).play('runner0');
+
+            this.runnersGroup = this.add.group();
+            for (i = 0; i < 200; i++) {
+                runnerSkin = Phaser.Math.Between(1, 8);
+                runnerYpos = Phaser.Math.Between(720, 870);
+                velocityRunners[i] = Phaser.Math.Between(-450, -80);
+                runner = this.physics.add.sprite(Phaser.Math.Between(200, 700), runnerYpos, 'imgM_R' + runnerSkin + '_1').setScale(1 - (870 - runnerYpos) / 500).setDepth(runnerYpos).play('runner' + runnerSkin).setVelocityX(velocity - velocityRunners[i]);
+                this.runnersGroup.add(runner);
+            }
+
+            
+         
+
+
+           
+            timedEvent = this.time.addEvent({ delay: 500, callback: () => { if (velocity <= -100) velocity +=10; }, callbackScope: this, repeat: -1, startAt: 0 });
+            this.input.on('pointerdown', function (pointer) {
+
+                velocity -= 10;
+                if (velocity <= -500) velocity = -500;
+
+            }, this);
+
+            this.input.mouse.disableContextMenu();
+
+           // this.input.topOnly = true;
         }
+
 
 
 
@@ -4313,13 +4564,141 @@
 
         function updateMarathonScene()
         { 
-            //var pointer = this.input.activePointer;
-            //text.setText([
-            //    'x: ' + pointer.worldX,
-            //    'y: ' + pointer.worldY,
-            //    'isDown: ' + pointer.isDown,
-            //    'rightButtonDown: ' + pointer.rightButtonDown()
-            //]);
+            this.background_mounts.tilePositionX += velocity / (-6000);
+            this.background_forest.tilePositionX += velocity / (-600);
+            this.background_grass.tilePositionX += velocity / (-300);
+            this.background_road.tilePositionX += velocity/(-50);
+
+
+            var chldB = this.buildingsGroup.getChildren();
+            for (i = 0; i < this.buildingsGroup.getLength(); i++) {
+                chldB[i].setVelocityX(velocity);
+            }
+            // recycling platforms
+           
+            this.buildingsGroup.getChildren().forEach(function (platform) {
+                
+                if (platform.x < - platform.displayWidth) {
+                    this.buildingsGroup.killAndHide(platform);
+                    this.buildingsGroup.remove(platform);
+                }
+            }, this);
+
+            var minDistance = 1920;
+            var platformDistance = 1920;
+            if (this.buildingsGroup.getLength()) {
+                x = chldB[this.buildingsGroup.getLength() - 1].x;
+                w = chldB[this.buildingsGroup.getLength() - 1].displayWidth;
+                platformDistance = 2120 - x - w;
+            }
+
+            if (platformDistance) {
+                minDistance = Math.min(minDistance, platformDistance);
+            }
+            
+           
+            // adding new builds
+            if (minDistance > this.nextBuildDistance) {
+                var nextBuilding = Phaser.Math.Between(1, 8)
+                //var nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
+                //this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth / 2);
+                if (!marathonRestarted) {
+                    marathonRestarted = true;
+                    platform = this.physics.add.sprite(-2520, 375, "imgM_b" + nextBuilding).setOrigin(0).setScale(1.5);
+                    //platform.setImmovable(true);
+                    platform.setVelocityX(velocity);
+                    this.buildingsGroup.add(platform);
+
+                    platform.displayWidth = buildingsWidth[nextBuilding-1];
+                    this.nextBuildDistance = Phaser.Math.Between(0, 50);
+                } else {
+
+                    platform = this.physics.add.sprite(2120 + buildingsWidth[nextBuilding - 1] / 4, 375, "imgM_b" + nextBuilding).setOrigin(0).setScale(1.5);
+
+                    platform.setImmovable(true);
+                    platform.setVelocityX(velocity);
+                    this.buildingsGroup.add(platform);
+                    platform.displayWidth = buildingsWidth[nextBuilding-1];
+                    this.nextBuildDistance = Phaser.Math.Between(10, 100);
+                }
+            }
+            
+
+              //skies
+            let minDistanceSkies = 1920;
+            this.skiesGroup.getChildren().forEach(function (platform) {
+                let skiesDistance = 1920 - platform.x - 300;
+                minDistanceSkies = Math.min(minDistanceSkies, skiesDistance);
+                if (platform.x <  -2000) {
+                    this.skiesGroup.killAndHide(platform);
+                    this.skiesGroup.remove(platform);
+                }
+            }, this);
+
+            // adding new skies
+            if (minDistanceSkies > this.nextSkiesDistance) {
+                platform = this.physics.add.sprite(1920 + 600, 0, 'imgM_sky' + Phaser.Math.Between(1, 2)).setOrigin(0);
+               // platform.setImmovable(true);
+                platform.setVelocityX(-50);
+                this.skiesGroup.add(platform);
+                this.nextSkiesDistance = Phaser.Math.Between(0, 600);
+            }
+
+            var chld = this.skiesGroup.getChildren();
+            for (i = 0; i < this.skiesGroup.getLength(); i++) {
+                chld[i].setScale(1 + (1920 - chld[i].x)/1750)
+            }
+
+            //front
+            let minDistanceFront = 1920;
+            this.frontGroup.getChildren().forEach(function (platform) {
+                let frontDistance = 1920 - platform.x - 200;
+                minDistanceFront = Math.min(minDistanceFront, frontDistance);
+                if (platform.x < -500) {
+                    this.frontGroup.killAndHide(platform);
+                    this.frontGroup.remove(platform);
+                }
+            }, this);
+
+            // adding new fronts
+            if (minDistanceFront > this.nextFrontDistance) {
+                platform = this.physics.add.sprite(1920 + 350, 1000, 'imgM_front' + Phaser.Math.Between(1, 2)).setScale(0.9).setOrigin(0).setDepth(500);
+               // platform.setImmovable(true);
+                platform.setVelocityX(velocity*1.5);
+                this.frontGroup.add(platform);
+                this.nextFrontDistance = Phaser.Math.Between(0, 950);
+            }
+
+            var chldF = this.frontGroup.getChildren();
+            for (i = 0; i < this.frontGroup.getLength(); i++) {
+                chldF[i].setVelocityX(velocity*1.5);
+            }
+
+            this.runner0.anims.msPerFrame = 200 + velocity/5;
+
+            var chldR = this.runnersGroup.getChildren();
+            for (i = 0; i < this.runnersGroup.getLength(); i++) {
+                chldR[i].anims.msPerFrame = 200 + velocityRunners[i] / 5;
+                chldR[i].setVelocityX(velocity - velocityRunners[i])
+            }
+
+
+
+
+
+
+           
+           
+            var pointer = this.input.activePointer;
+            text.setText([
+                //'x: ' + this.runner1.anims.msPerFrame,
+                'y: ' + this.runner1v,
+                'n: ' + velocity,
+                'isDown: ' + pointer.isDown,
+                'rightButtonDown: ' + pointer.rightButtonDown()
+            ]);
+
+           
         }
 
      
