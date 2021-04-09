@@ -36,6 +36,8 @@
             this.load.image('imgM_grass', 'assets/marathon/grass.png');
             this.load.image('imgM_grass0', 'assets/marathon/grass0.png');
             this.load.image('imgM_road', 'assets/marathon/road.png');
+            this.load.image('imgM_start', 'assets/marathon/start.png');
+            this.load.image('imgM_finish', 'assets/marathon/finish.png');
 
             for (var i = 1; i <= 8; i++) {
                 this.load.image('imgM_b' + i, 'assets/marathon/mid/b' + i+ '.png');
@@ -3315,12 +3317,12 @@
             }, this);
             
             sprite_youtube.on('pointerdown', function (pointer, gameObject) {
-                window.open('https://youtube.com');
+                window.open('http://bit.ly/marathoncoordinates');
                // window.location.href = 'https://youtube.com'
             }, this);
 
             sprite_insta.on('pointerdown', function (pointer, gameObject) {
-                window.open('https://instagram.com');
+                window.open('https://instagram.com/runnerarmstretching');
                // window.location.href = 'https://youtube.com'
             }, this);
 
@@ -4214,14 +4216,44 @@
         function createMarathonScene() {
 
             this.cameras.main.fadeIn(3000);
-            
+            var music = this.sound.add('mp3marathon');
+
             this.add.image(0, 0, 'imgM_bg').setOrigin(0);
             this.sound.play('mp3shoot');
-            timedEvent = this.time.addEvent({ delay: 500, callback: () => { this.sound.play('mp3marathon'); }, callbackScope: this, repeat: 0, startAt: 0 });
+            timedEvent = this.time.addEvent({ delay: 500, callback: () => { music.play();/*this.sound.play('mp3marathon');*/ }, callbackScope: this, repeat: 0, startAt: 0 });
             this.background_mounts = this.add.tileSprite(0, 430, 1980, 260, 'imgM_mounts').setOrigin(0);
             this.background_forest = this.add.tileSprite(0, 500, 1980, 220, 'imgM_forest').setOrigin(0);
             this.background_grass = this.add.tileSprite(0, 720, 1980, 30, 'imgM_grass0').setOrigin(0);
             this.background_road = this.add.tileSprite(0, 750, 1980, 330, 'imgM_road').setOrigin(0);
+
+            this.background_start = this.physics.add.sprite(1000, 750, 'imgM_start').setOrigin(0).setVelocityX(-100);
+
+           
+            timedEvent = this.time.addEvent({
+                delay: 625000, callback: () => {
+                    this.background_finish = this.physics.add.sprite(2000, 750, 'imgM_finish').setOrigin(0).setVelocityX(-120);
+
+                }, callbackScope: this, repeat: 0, startAt: 0
+            });
+
+            timedEvent = this.time.addEvent({
+                delay: 628500, callback: () => {
+                   // music.stop();
+                    this.cameras.main.fadeOut(3000);
+                   // this.sound.stop('mp3marathon');
+                }, callbackScope: this, repeat: 0, startAt: 0
+            });
+            
+            this.background_start = this.physics.add.sprite(1000, 750, 'imgM_start').setOrigin(0).setVelocityX(-100);
+            timedEvent = this.time.addEvent({
+                delay: 630000, callback: () => {
+                    music.stop();
+                   // this.cameras.main.fadeOut(3000);
+                   // this.sound.stop('mp3marathon');
+                }, callbackScope: this, repeat: 0, startAt: 0
+            });
+
+            
 
             this.buildingsGroup = this.add.group();
             this.skiesGroup = this.add.group();
@@ -4569,6 +4601,11 @@
             this.background_grass.tilePositionX += velocity / (-300);
             this.background_road.tilePositionX += velocity/(-50);
 
+           
+
+            //if (this.background_start.x < - 1000) {
+            //    this.background_start.destroy();
+            //}
 
             var chldB = this.buildingsGroup.getChildren();
             for (i = 0; i < this.buildingsGroup.getLength(); i++) {
@@ -4662,7 +4699,7 @@
 
             // adding new fronts
             if (minDistanceFront > this.nextFrontDistance) {
-                platform = this.physics.add.sprite(1920 + 350, 1000, 'imgM_front' + Phaser.Math.Between(1, 2)).setScale(0.9).setOrigin(0).setDepth(500);
+                platform = this.physics.add.sprite(1920 + 350, 1000, 'imgM_front' + Phaser.Math.Between(1, 2)).setScale(0.9).setOrigin(0).setDepth(1000);
                // platform.setImmovable(true);
                 platform.setVelocityX(velocity*1.5);
                 this.frontGroup.add(platform);
@@ -4675,7 +4712,12 @@
             }
 
             this.runner0.anims.msPerFrame = 200 + velocity/5;
-
+            if (this.background_start) {
+                this.background_start.setVelocityX(velocity);
+            }
+            if (this.background_finish) {
+                this.background_finish.setVelocityX(velocity);
+            }
             var chldR = this.runnersGroup.getChildren();
             for (i = 0; i < this.runnersGroup.getLength(); i++) {
                 chldR[i].anims.msPerFrame = 200 + velocityRunners[i] / 5;
@@ -4689,14 +4731,14 @@
 
            
            
-            var pointer = this.input.activePointer;
-            text.setText([
-                //'x: ' + this.runner1.anims.msPerFrame,
-                'y: ' + this.runner1v,
-                'n: ' + velocity,
-                'isDown: ' + pointer.isDown,
-                'rightButtonDown: ' + pointer.rightButtonDown()
-            ]);
+            //var pointer = this.input.activePointer;
+            //text.setText([
+            //    //'x: ' + this.runner1.anims.msPerFrame,
+            //    'y: ' + this.runner1v,
+            //    'n: ' + velocity,
+            //    'isDown: ' + pointer.isDown,
+            //    'rightButtonDown: ' + pointer.rightButtonDown()
+            //]);
 
            
         }
