@@ -4649,6 +4649,12 @@
                 }
                 childMonth[g_month].visible = true;
 
+                if (g_month == 2 && g_day == 24 && winBooks && winBag && winMap && winTreadmill && winFile && winOpponents) {
+
+                    this.sound.play('mp3yawn');
+
+                }
+
             }, this);
 
             sprite_dayH.on('pointerdown', function (pointer, gameObject) {
@@ -4661,7 +4667,11 @@
                     childDayH[i].visible = false;
                 }
                 childDayH[(g_day - g_day % 10) / 10].visible = true;
+                if (g_month == 2 && g_day == 24 && winBooks && winBag && winMap && winTreadmill && winFile && winOpponents) {
 
+                    this.sound.play('mp3yawn');
+
+                }
 
             }, this);
 
@@ -4675,7 +4685,11 @@
                     childDayL[i].visible = false;
                 }
                 childDayL[g_day % 10].visible = true;
+                if (g_month == 2 && g_day == 24 && winBooks && winBag && winMap && winTreadmill && winFile && winOpponents) {
 
+                    this.sound.play('mp3yawn');
+
+                }
             }, this);
 
             sprite_hint.on('pointerdown', function (pointer, gameObject) {
