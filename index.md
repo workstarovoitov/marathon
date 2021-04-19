@@ -672,9 +672,12 @@
         var list2XY = [1125, 580];
         var list3XY = [1150, 565];
         var list4XY = [1150, 550];
-        var g_spriteFlag1, g_spriteFlag2, g_spriteFlag3, g_spriteFlag4;
+        var flag1Set = false;
+        var flag2Set = false;
+        var flag3Set = false;
+        var flag4Set = false;
         var pageMag = 0;
-
+        var g_spriteFlag1, g_spriteFlag2, g_spriteFlag3, g_spriteFlag4;
         var flag1Geom, flag2Geom, flag3Geom, flag4Geom;
         var mapZone1Geom, mapZone2Geom, mapZone3Geom, mapZone4Geom;
         var zoneA2, zoneB4, zoneC1, zoneD2;
@@ -2481,7 +2484,7 @@
             var sprite_zoneB4 = this.add.sprite(0, 0);
             var sprite_zoneC1 = this.add.sprite(0, 0);
             var sprite_zoneD2 = this.add.sprite(0, 0);
-
+           
             var zoneMap = this.add.zone(0, 0).setOrigin(0);
             var zoneA2 = this.add.zone(0, 0).setOrigin(0);
             var zoneB4 = this.add.zone(0, 0).setOrigin(0);
@@ -2510,7 +2513,10 @@
             this.input.setDraggable(g_spriteFlag2);
             this.input.setDraggable(g_spriteFlag3);
             this.input.setDraggable(g_spriteFlag4);
-
+            g_spriteFlag1.setName('f1');
+            g_spriteFlag2.setName('f2');
+            g_spriteFlag3.setName('f3');
+            g_spriteFlag4.setName('f4');
             var plgn_mainRight = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
             var plgn_map = new Phaser.Geom.Polygon([270, 60, 1350, 180, 1350, 870, 270, 980]);
 
@@ -2524,15 +2530,15 @@
             sprite_zoneC1.setInteractive(plgn_C1, Phaser.Geom.Polygon.Contains);
             sprite_zoneD2.setInteractive(plgn_D2, Phaser.Geom.Polygon.Contains);
 
-            var graphics = this.add.graphics();
-            graphics.fillStyle(0xffaa00);
-            graphics.fillPoints(plgn_A2.points, true);
-            graphics.fillStyle(0xffaa00);
-            graphics.fillPoints(plgn_B4.points, true);
-            graphics.fillStyle(0xffaa00);
-            graphics.fillPoints(plgn_C1.points, true);
-            graphics.fillStyle(0xffaa00);
-            graphics.fillPoints(plgn_D2.points, true);
+            //var graphics = this.add.graphics();
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_A2.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_B4.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_C1.points, true);
+            //graphics.fillStyle(0xffaa00);
+            //graphics.fillPoints(plgn_D2.points, true);
 
             text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
 
@@ -2556,6 +2562,11 @@
             zoneC1.input.dropZone = true;
             zoneD2.input.dropZone = true;
 
+
+            var getFromA2 = false;
+            var getFromB4 = false;
+            var getFromC1 = false;
+            var getFromD2 = false;
 
 
             sprite_mainRight.on('pointerdown', function (pointer, gameObject) {
@@ -2583,26 +2594,64 @@
                 FlagsScene8XY[2][1] = g_spriteFlag3.y;
                 FlagsScene8XY[3][0] = g_spriteFlag4.x;
                 FlagsScene8XY[3][1] = g_spriteFlag4.y;
+               
             });
+           
 
             this.input.on('dragenter', function (pointer, gameObject, dropZone) {
                 if (dropZone.name == 'zMap') {
                     mapLeave = false;
+
                 }
                 if (dropZone.name == 'zA2') {
-                    if (mapLeave) setA2++;
+
+                    if (mapLeave) {
+                        setA2++;
+
+                    } else {
+                        if (setA2) {
+                            setA2--;
+                            getFromA2 = true;
+                        }
+                    }
+
                 }
 
                 if (dropZone.name == 'zB4') {
-                    if (mapLeave) setB4++;
+                    if (mapLeave) {
+                        setB4++;
+                       
+                    } else {
+                        if (setB4) {
+                            setB4--;
+                            getFromB4 = true;
+                        }
+
+                    }
                 }
 
                 if (dropZone.name == 'zC1') {
-                    if (mapLeave) setC1++;
+                    if (mapLeave) {
+                        setC1++;
+                       
+                    } else {
+                        if (setC1) {
+                            setC1--;
+                            getFromC1 = true;
+                        }
+                    }
                 }
 
                 if (dropZone.name == 'zD2') {
-                    if (mapLeave) setD2++;
+                    if (mapLeave) {
+                        setD2++;
+                      
+                    } else {
+                        if (setD2) {
+                            setD2--;
+                            getFromD2 = true;
+                        }
+                    }
                 }
 
             });
@@ -2613,25 +2662,59 @@
                 }
                 if (dropZone.name == 'zA2') {
                     if (setA2) setA2--;
+                    if (getFromA2 && setA2) { setA2++; getFromA2 = false; }
                     
                 }
 
                 if (dropZone.name == 'zB4') {
-                    if(setB4) setB4--;
+                    if (setB4) setB4--;
+                    if (getFromB4 && setB4) { setB4++; getFromB4 = false; }
                 }
 
                 if (dropZone.name == 'zC1') {
-                    if(setC1) setC1--;
+                    if (setC1) setC1--;
+                    if (getFromC1 && setC1) { setC1++; getFromC1 = false; }
                 }
 
                 if (dropZone.name == 'zD2') {
-                    if(setD2) setD2--;
+                    if (setD2) setD2--;
+                    if (getFromD2 && setD2) { setD2++; getFromD2 = false; }
                 }
 
             });
 
             this.input.on('drop', function (pointer, gameObject, dropZone) {
                 game.sound.play('mp3Flag');
+
+                if (dropZone.name == 'zA2') {
+
+                    if (!mapLeave) {
+                        setA2++;
+
+                    } 
+
+                }
+
+                if (dropZone.name == 'zB4') {
+                    if (!mapLeave) {
+                        setB4++;
+
+                    } 
+                }
+
+                if (dropZone.name == 'zC1') {
+                    if (!mapLeave) {
+                        setC1++;
+
+                    } 
+                }
+
+                if (dropZone.name == 'zD2') {
+                    if (!mapLeave) {
+                        setD2++;
+
+                    } 
+                }
                 mapLeave = false;
 
 
@@ -4951,12 +5034,7 @@
 
         function updateMapScene() {
 
-            //if (zoneA2.body.touching.g_spriteFlag1 || zoneA2.body.touching.g_spriteFlag2 || zoneA2.body.touching.g_spriteFlag3 || zoneA2.body.touching.g_spriteFlag4) {
-            //    setA2 = true;
-            //} else {
-            //    
-            //}
-            //setA2 = false;
+            
             //var pointer = this.input.activePointer;
             //text.setText([
             //    'x: ' + pointer.worldX,
