@@ -2524,15 +2524,15 @@
             sprite_zoneC1.setInteractive(plgn_C1, Phaser.Geom.Polygon.Contains);
             sprite_zoneD2.setInteractive(plgn_D2, Phaser.Geom.Polygon.Contains);
 
-            //var graphics = this.add.graphics();
-            //graphics.fillStyle(0xffaa00);
-            //graphics.fillPoints(plgn_A2.points, true);
-            //graphics.fillStyle(0xffaa00);
-            //graphics.fillPoints(plgn_B4.points, true);
-            //graphics.fillStyle(0xffaa00);
-            //graphics.fillPoints(plgn_C1.points, true);
-            //graphics.fillStyle(0xffaa00);
-            //graphics.fillPoints(plgn_D2.points, true);
+            var graphics = this.add.graphics();
+            graphics.fillStyle(0xffaa00);
+            graphics.fillPoints(plgn_A2.points, true);
+            graphics.fillStyle(0xffaa00);
+            graphics.fillPoints(plgn_B4.points, true);
+            graphics.fillStyle(0xffaa00);
+            graphics.fillPoints(plgn_C1.points, true);
+            graphics.fillStyle(0xffaa00);
+            graphics.fillPoints(plgn_D2.points, true);
 
             text = this.add.text(10, 10, '', { fill: '#aaffff' }).setDepth(1);
 
@@ -2682,7 +2682,7 @@
             this.add.image(0, 0, 'imgBoard').setOrigin(0);
             this.add.image(350, 820, 'imgSticker').setOrigin(0);
             this.add.image(700, 210, 'imgBoardFlag2').setOrigin(0).setScale(0.12).setAngle(-12);
-
+            shelfOpen = false;
             var sprite_mainLeft = this.add.sprite(0, 0);
             var sprite_board = this.add.sprite(0, 0);
             var sprite_wardrobe = this.add.sprite(0, 0);
