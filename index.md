@@ -647,7 +647,7 @@
         var bNum = 0;
         var buildingsWidth = [225, 450, 675, 675, 900, 1125, 1125, 1350];
         //var buildingsWidth = [150, 300, 450, 450, 600, 750, 750, 900];
-        var hintLink = 'https://youtube.com';
+        var hintLink = 'http://bit.ly/loesungmarathon';
         var depth = 100;
         var tap = 0;
         var printerCount;
