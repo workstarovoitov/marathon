@@ -648,6 +648,8 @@
         var buildingsWidth = [225, 450, 675, 675, 900, 1125, 1125, 1350];
         //var buildingsWidth = [150, 300, 450, 450, 600, 750, 750, 900];
         var hintLink = 'http://bit.ly/loesungmarathon';
+        var youtubeLink = 'https://www.youtube.com/watch?v=MaIza_f69EE';
+        var instaLink = 'https://instagram.com/runnerarmstretching';
         var depth = 100;
         var tap = 0;
         var printerCount;
@@ -3746,12 +3748,12 @@
             }, this);
 
             sprite_youtube.on('pointerdown', function (pointer, gameObject) {
-                window.open('http://bit.ly/marathoncoordinates');
+                window.open(youtubeLink);
                 // window.location.href = 'https://youtube.com'
             }, this);
 
             sprite_insta.on('pointerdown', function (pointer, gameObject) {
-                window.open('https://instagram.com/runnerarmstretching');
+                window.open(instaLink);
                 // window.location.href = 'https://youtube.com'
             }, this);
 
