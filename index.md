@@ -614,11 +614,12 @@
         });
 
         var config = {
-            type: Phaser.CANVAS,
+            type: Phaser.AUTO,
             backgroundColor: '#FBFCFC',
             scale: {
                 mode: Phaser.Scale.FIT,
                 parent: 'phaser-example',
+                 pixelArt: true,
                 width: 1920,
                 height: 1080,
                 min: {
