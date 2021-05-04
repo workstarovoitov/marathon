@@ -21,12 +21,12 @@
             preload: function () {
 
 
-               
+
 
                 var width = this.cameras.main.width;
                 var height = this.cameras.main.height;
                 var loadingText = this.make.text({
-                    x: width / 2-110,
+                    x: width / 2 - 110,
                     y: height / 2 - 50,
                     text: 'Loading',
                     style: {
@@ -37,7 +37,7 @@
                 loadingText.setOrigin(0.5, 0.5);
 
                 var percentText = this.make.text({
-                    x: width / 2+100,
+                    x: width / 2 + 100,
                     y: height / 2 - 50,
                     text: '0%',
                     style: {
@@ -61,7 +61,7 @@
 
                 this.load.on('progress', function (value) {
                     percentText.setText(parseInt(value * 100) + '%');
-                   
+
                 });
 
                 this.load.on('fileprogress', function (file) {
@@ -69,7 +69,7 @@
                 });
 
                 this.load.on('complete', function () {
-                
+
                     loadingText.destroy();
                     percentText.destroy();
                     assetText.destroy();
@@ -77,7 +77,7 @@
 
 
                 this.load.image('imgStartBG', 'assets/background/start.jpg');
-                
+
                 this.load.image('imgM_bg', 'assets/marathon/background.jpg');
                 this.load.image('imgM_mounts', 'assets/marathon/mounts.png');
                 this.load.image('imgM_forest', 'assets/marathon/forest.png');
@@ -2053,7 +2053,7 @@
                 childD3[tap % 10].visible = true;
                 fxTreadmill.play();
 
-                step.visible = false;
+                //step.visible = false;
                 step.disableInteractive();
                 if (stepL) {
                     fxStepL.play();
@@ -2085,6 +2085,8 @@
                             ambient.pause();
                         }
                         sprite_mainRight.disableInteractive();
+                        sprite_map.disableInteractive();
+                        sprite_soundBox.disableInteractive();
                         //sprite_mainRight.stopPropagation();
 
                         //timerTreadmill = this.sys.game.loop.time;
@@ -2123,7 +2125,7 @@
                         });
 
                         timedEvent = this.time.addEvent({
-                            delay: 4975.61, callback: () => {
+                            delay: 4875.61, callback: () => {
 
                                 imgSteady.visible = false;
                                 imgGo.visible = true;
@@ -2136,6 +2138,28 @@
                                             step.setInteractive();
                                         }
 
+                                    }, callbackScope: this, repeat: 58, startAt: 0
+                                });
+
+                                
+
+                            }, callbackScope: this, repeat: 0, startAt: 0
+                        });
+
+                        timedEvent = this.time.addEvent({
+                            delay: 5225.61, callback: () => {
+
+                                imgSteady.visible = false;
+                                imgGo.visible = true;
+                                // step.visible = true;
+                                // step.setInteractive();
+                               
+
+                                timedEvent3 = this.time.addEvent({
+                                    delay: 487.80, callback: () => {
+                                      
+                                            step.visible = false;
+                                            step.disableInteractive();
                                     }, callbackScope: this, repeat: 58, startAt: 0
                                 });
 
@@ -2210,6 +2234,9 @@
                                 step.visible = false;
                                 step.disableInteractive();
                                 sprite_mainRight.setInteractive(plgn_mainRight, Phaser.Geom.Polygon.Contains);
+                                sprite_soundBox.setInteractive(plgn_soundBox, Phaser.Geom.Polygon.Contains);
+                                sprite_map.setInteractive(plgn_map, Phaser.Geom.Polygon.Contains);
+
                                 if (!winTreadmill) {
                                     childD1[0].visible = true;
                                     childD2[0].visible = true;
@@ -2486,7 +2513,7 @@
             var sprite_zoneB4 = this.add.sprite(0, 0);
             var sprite_zoneC1 = this.add.sprite(0, 0);
             var sprite_zoneD2 = this.add.sprite(0, 0);
-           
+
             var zoneMap = this.add.zone(0, 0).setOrigin(0);
             var zoneA2 = this.add.zone(0, 0).setOrigin(0);
             var zoneB4 = this.add.zone(0, 0).setOrigin(0);
@@ -2596,9 +2623,9 @@
                 FlagsScene8XY[2][1] = g_spriteFlag3.y;
                 FlagsScene8XY[3][0] = g_spriteFlag4.x;
                 FlagsScene8XY[3][1] = g_spriteFlag4.y;
-               
+
             });
-           
+
 
             this.input.on('dragenter', function (pointer, gameObject, dropZone) {
                 if (dropZone.name == 'zMap') {
@@ -2622,7 +2649,7 @@
                 if (dropZone.name == 'zB4') {
                     if (mapLeave) {
                         setB4++;
-                       
+
                     } else {
                         if (setB4) {
                             setB4--;
@@ -2635,7 +2662,7 @@
                 if (dropZone.name == 'zC1') {
                     if (mapLeave) {
                         setC1++;
-                       
+
                     } else {
                         if (setC1) {
                             setC1--;
@@ -2647,7 +2674,7 @@
                 if (dropZone.name == 'zD2') {
                     if (mapLeave) {
                         setD2++;
-                      
+
                     } else {
                         if (setD2) {
                             setD2--;
@@ -2665,7 +2692,7 @@
                 if (dropZone.name == 'zA2') {
                     if (setA2) setA2--;
                     if (getFromA2 && setA2) { setA2++; getFromA2 = false; }
-                    
+
                 }
 
                 if (dropZone.name == 'zB4') {
@@ -2693,7 +2720,7 @@
                     if (!mapLeave) {
                         setA2++;
 
-                    } 
+                    }
 
                 }
 
@@ -2701,21 +2728,21 @@
                     if (!mapLeave) {
                         setB4++;
 
-                    } 
+                    }
                 }
 
                 if (dropZone.name == 'zC1') {
                     if (!mapLeave) {
                         setC1++;
 
-                    } 
+                    }
                 }
 
                 if (dropZone.name == 'zD2') {
                     if (!mapLeave) {
                         setD2++;
 
-                    } 
+                    }
                 }
                 mapLeave = false;
 
@@ -3199,15 +3226,15 @@
                     list1XY[0] = gameObject.x;
                     list1XY[1] = gameObject.y;
                 }
-                 if ('sList2' == gameObject.name) {
+                if ('sList2' == gameObject.name) {
                     list2XY[0] = gameObject.x;
                     list2XY[1] = gameObject.y;
                 }
-                 if ('sList3' == gameObject.name) {
+                if ('sList3' == gameObject.name) {
                     list3XY[0] = gameObject.x;
                     list3XY[1] = gameObject.y;
                 }
-                 if ('sList4' == gameObject.name) {
+                if ('sList4' == gameObject.name) {
                     list4XY[0] = gameObject.x;
                     list4XY[1] = gameObject.y;
                 }
@@ -4714,7 +4741,7 @@
         function createMagazineScene() {
 
             imgSceneClosed = this.add.image(0, 0, 'imgDeskClosedB').setOrigin(0);
-            
+
             var groupMag = this.add.group();
             for (var i = 1; i <= 7; i++) {
                 groupMag.create(0, 0, 'imgMag' + i).setOrigin(0);
@@ -4748,11 +4775,11 @@
                     }
                     childMag[pageMag].visible = true;
                 }
-                
+
             }, this);
 
             sprite_rightPage.on('pointerdown', function (pointer, gameObject) {
-                if (pageMag<6) {
+                if (pageMag < 6) {
                     pageMag++;
                     this.sound.play('mp3page');
                     for (var i = 0; i < 7; i++) {
@@ -5050,7 +5077,7 @@
 
         function updateMapScene() {
 
-            
+
             //var pointer = this.input.activePointer;
             //text.setText([
             //    'x: ' + pointer.worldX,
@@ -5059,7 +5086,7 @@
             //    'fill2: ' + setB4,
             //    'fill3: ' + setC1,
             //    'fill4: ' + setD2,
-                
+
             //    'isDown: ' + pointer.isDown,
             //    'rightButtonDown: ' + pointer.rightButtonDown()
             //]);
@@ -5271,10 +5298,10 @@
 
             this.runner0.anims.msPerFrame = 200 + velocity / 5;
             if (this.background_start) {
-                this.background_start.setVelocityX(velocity-25);
+                this.background_start.setVelocityX(velocity - 25);
             }
             if (this.background_finish) {
-                this.background_finish.setVelocityX(velocity-25);
+                this.background_finish.setVelocityX(velocity - 25);
             }
             var chldR = this.runnersGroup.getChildren();
             for (i = 0; i < this.runnersGroup.getLength(); i++) {
@@ -5316,7 +5343,7 @@
             }
         }
 
-        
+
 
     </script>
 
