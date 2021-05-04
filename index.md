@@ -614,7 +614,7 @@
         });
 
         var config = {
-            type: Phaser.AUTO,
+            type: Phaser.CANVAS,
             backgroundColor: '#FBFCFC',
             scale: {
                 mode: Phaser.Scale.FIT,
