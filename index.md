@@ -187,6 +187,7 @@
 
                 this.load.image('imgListFull', 'assets/sprites/opponents/lFull.png');
 
+                this.load.image('imgBNG', 'assets/sprites/board/bng.jpg');
                 this.load.image('imgPoster', 'assets/sprites/board/poster.png');
                 this.load.image('imgCheck', 'assets/sprites/board/check.png');
                 this.load.image('imgChecklist', 'assets/sprites/board/checklist.png');
@@ -239,6 +240,7 @@
                 this.load.image('imgPrinterClear', 'assets/sprites/printerClear.png');
                 this.load.image('imgPrinterPrinted', 'assets/sprites/printerPrinted.png');
 
+                this.load.image('imgBNGScene5', 'assets/sprites/bngScene5.png');
                 this.load.image('imgListFScene5', 'assets/sprites/lFullScene5.png');
                 this.load.image('imgListScene5', 'assets/sprites/listScene5.png');
                 this.load.image('imgBallScene5', 'assets/sprites/ballScene5.png');
@@ -619,7 +621,7 @@
             scale: {
                 mode: Phaser.Scale.FIT,
                 parent: 'phaser-example',
-                 pixelArt: true,
+                pixelArt: true,
                 width: 1920,
                 height: 1080,
                 min: {
@@ -1139,6 +1141,7 @@
         function createWardrobeScene() {
 
             this.add.image(0, 0, 'imgWardrobe').setOrigin(0);
+            this.add.image(355, 355, 'imgBNGScene5').setOrigin(0).setScale(0.4);
             this.add.image(150, 380, 'imgBoardScene5').setOrigin(0);
             this.add.image(235, 595, 'imgBallScene5').setOrigin(0);
             this.add.image(255, 585, 'imgBallScene5').setOrigin(0);
@@ -2142,7 +2145,7 @@
                                     }, callbackScope: this, repeat: 58, startAt: 0
                                 });
 
-                                
+
 
                             }, callbackScope: this, repeat: 0, startAt: 0
                         });
@@ -2154,13 +2157,13 @@
                                 imgGo.visible = true;
                                 // step.visible = true;
                                 // step.setInteractive();
-                               
+
 
                                 timedEvent3 = this.time.addEvent({
                                     delay: 487.80, callback: () => {
-                                      
-                                            step.visible = false;
-                                            step.disableInteractive();
+
+                                        step.visible = false;
+                                        step.disableInteractive();
                                     }, callbackScope: this, repeat: 58, startAt: 0
                                 });
 
@@ -2793,6 +2796,7 @@
         function createBoardScene() {
 
             this.add.image(0, 0, 'imgBoard').setOrigin(0);
+            this.add.image(1050, 200, 'imgBNG').setOrigin(0).setScale(0.8).setAngle(-5);;
             this.add.image(350, 820, 'imgSticker').setOrigin(0);
             this.add.image(700, 210, 'imgBoardFlag2').setOrigin(0).setScale(0.12).setAngle(-12);
             shelfOpen = false;
