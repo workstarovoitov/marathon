@@ -2913,13 +2913,13 @@
                 var plgn_mainLeft = new Phaser.Geom.Polygon([0, 0, 1920, 0, 1920, 1080, 0, 1080]);
                 var plgn_board = new Phaser.Geom.Polygon([290, 0, 1690, 0, 1650, 860, 330, 860]);
                 var plgn_wardrobe = new Phaser.Geom.Polygon([1630, 0, 1920, 0, 1920, 920, 1630, 920]);
-                var plgn_ñ1 = new Phaser.Geom.Polygon([1050, 550, 1450, 550, 1450, 580, 1050, 580]);
-                var plgn_ñ2 = new Phaser.Geom.Polygon([1050, 580, 1450, 580, 1450, 610, 1050, 610]);
-                var plgn_ñ3 = new Phaser.Geom.Polygon([1050, 610, 1450, 610, 1450, 640, 1050, 640]);
-                var plgn_ñ4 = new Phaser.Geom.Polygon([1050, 640, 1450, 640, 1450, 670, 1050, 670]);
-                var plgn_ñ5 = new Phaser.Geom.Polygon([1050, 670, 1450, 670, 1450, 700, 1050, 700]);
-                var plgn_ñ6 = new Phaser.Geom.Polygon([1050, 700, 1450, 700, 1450, 730, 1050, 730]);
-                var plgn_ñ7 = new Phaser.Geom.Polygon([1050, 730, 1450, 730, 1450, 760, 1050, 760]);
+                var plgn_Ñ1 = new Phaser.Geom.Polygon([1050, 550, 1450, 550, 1450, 580, 1050, 580]);
+                var plgn_Ñ2 = new Phaser.Geom.Polygon([1050, 580, 1450, 580, 1450, 610, 1050, 610]);
+                var plgn_Ñ3 = new Phaser.Geom.Polygon([1050, 610, 1450, 610, 1450, 640, 1050, 640]);
+                var plgn_Ñ4 = new Phaser.Geom.Polygon([1050, 640, 1450, 640, 1450, 670, 1050, 670]);
+                var plgn_Ñ5 = new Phaser.Geom.Polygon([1050, 670, 1450, 670, 1450, 700, 1050, 700]);
+                var plgn_Ñ6 = new Phaser.Geom.Polygon([1050, 700, 1450, 700, 1450, 730, 1050, 730]);
+                var plgn_Ñ7 = new Phaser.Geom.Polygon([1050, 730, 1450, 730, 1450, 760, 1050, 760]);
 
                 var groupC1 = this.add.group();
                 var groupC2 = this.add.group();
@@ -2960,21 +2960,21 @@
                 if (countries[4]) childC5[countries[4] - 1].visible = true;
                 if (countries[5]) childC6[countries[5] - 1].visible = true;
                 if (countries[6]) childC7[countries[6] - 1].visible = true;
-                var sprite_ñ1 = this.add.sprite(0, 0);
-                var sprite_ñ2 = this.add.sprite(0, 0);
-                var sprite_ñ3 = this.add.sprite(0, 0);
-                var sprite_ñ4 = this.add.sprite(0, 0);
-                var sprite_ñ5 = this.add.sprite(0, 0);
-                var sprite_ñ6 = this.add.sprite(0, 0);
-                var sprite_ñ7 = this.add.sprite(0, 0);
+                var sprite_Ñ1 = this.add.sprite(0, 0);
+                var sprite_Ñ2 = this.add.sprite(0, 0);
+                var sprite_Ñ3 = this.add.sprite(0, 0);
+                var sprite_Ñ4 = this.add.sprite(0, 0);
+                var sprite_Ñ5 = this.add.sprite(0, 0);
+                var sprite_Ñ6 = this.add.sprite(0, 0);
+                var sprite_Ñ7 = this.add.sprite(0, 0);
                 if (listOk) {
-                    sprite_ñ1.setInteractive(plgn_ñ1, Phaser.Geom.Polygon.Contains);
-                    sprite_ñ2.setInteractive(plgn_ñ2, Phaser.Geom.Polygon.Contains);
-                    sprite_ñ3.setInteractive(plgn_ñ3, Phaser.Geom.Polygon.Contains);
-                    sprite_ñ4.setInteractive(plgn_ñ4, Phaser.Geom.Polygon.Contains);
-                    sprite_ñ5.setInteractive(plgn_ñ5, Phaser.Geom.Polygon.Contains);
-                    sprite_ñ6.setInteractive(plgn_ñ6, Phaser.Geom.Polygon.Contains);
-                    sprite_ñ7.setInteractive(plgn_ñ7, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ1.setInteractive(plgn_Ñ1, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ2.setInteractive(plgn_Ñ2, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ3.setInteractive(plgn_Ñ3, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ4.setInteractive(plgn_Ñ4, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ5.setInteractive(plgn_Ñ5, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ6.setInteractive(plgn_Ñ6, Phaser.Geom.Polygon.Contains);
+                    sprite_Ñ7.setInteractive(plgn_Ñ7, Phaser.Geom.Polygon.Contains);
                 }
 
 
@@ -3017,7 +3017,7 @@
                     }
                 }, this);
 
-                sprite_ñ1.on('pointerdown', function (pointer, gameObject) {
+                sprite_Ñ1.on('pointerdown', function (pointer, gameObject) {
                     countries[0]++;
                     if (countries[0] >= 12) countries[0] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3033,18 +3033,18 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
 
-                sprite_ñ2.on('pointerdown', function (pointer, gameobject) {
+                sprite_Ñ2.on('pointerdown', function (pointer, gameobject) {
                     countries[1]++;
                     if (countries[1] >= 12) countries[1] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3060,18 +3060,18 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
 
-                sprite_ñ3.on('pointerdown', function (pointer, gameobject) {
+                sprite_Ñ3.on('pointerdown', function (pointer, gameobject) {
                     countries[2]++;
                     if (countries[2] >= 12) countries[2] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3087,18 +3087,18 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
 
-                sprite_ñ4.on('pointerdown', function (pointer, gameobject) {
+                sprite_Ñ4.on('pointerdown', function (pointer, gameobject) {
                     countries[3]++;
                     if (countries[3] >= 12) countries[3] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3113,18 +3113,18 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
 
-                sprite_ñ5.on('pointerdown', function (pointer, gameobject) {
+                sprite_Ñ5.on('pointerdown', function (pointer, gameobject) {
                     countries[4]++;
                     if (countries[4] >= 12) countries[4] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3140,18 +3140,18 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
 
-                sprite_ñ6.on('pointerdown', function (pointer, gameobject) {
+                sprite_Ñ6.on('pointerdown', function (pointer, gameobject) {
                     countries[5]++;
                     if (countries[5] >= 12) countries[5] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3167,18 +3167,18 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
 
-                sprite_ñ7.on('pointerdown', function (pointer, gameobject) {
+                sprite_Ñ7.on('pointerdown', function (pointer, gameobject) {
                     countries[6]++;
                     if (countries[6] >= 12) countries[6] = 1;
                     for (var i = 0; i < 12; i++) {
@@ -3194,13 +3194,13 @@
                         img_check6.visible = true;
                         fxPage = this.sound.add('mp3Mark1');
                         fxPage.play();
-                        sprite_ñ1.disableInteractive();
-                        sprite_ñ2.disableInteractive();
-                        sprite_ñ3.disableInteractive();
-                        sprite_ñ4.disableInteractive();
-                        sprite_ñ5.disableInteractive();
-                        sprite_ñ6.disableInteractive();
-                        sprite_ñ7.disableInteractive();
+                        sprite_Ñ1.disableInteractive();
+                        sprite_Ñ2.disableInteractive();
+                        sprite_Ñ3.disableInteractive();
+                        sprite_Ñ4.disableInteractive();
+                        sprite_Ñ5.disableInteractive();
+                        sprite_Ñ6.disableInteractive();
+                        sprite_Ñ7.disableInteractive();
 
                     }
                 }, this);
